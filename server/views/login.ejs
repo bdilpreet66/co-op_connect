@@ -1,21 +1,91 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <title>Login</title>
-  <link rel="stylesheet" href="/css/styles.css">
+    <title>Login</title>
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
+
 <body>
-  <h1>Login</h1>
-  <img src="/images/Logowithoutname.png" alt="Logo">
-  <form action="/login" method="POST">
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required>
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required>
-    <label for="remember-me">Remember Me:</label>
-    <input type="checkbox" id="remember-me" name="remember-me">
-    <button type="submit">Login</button>
-  </form>
-  <a href="/signup">Sign Up</a>
+
+    <!-- Logo at the top left corner -->
+    <div class="container mt-3">
+        <img src="/images/Logowithname.png" alt="Logo" class="img-fluid logo">
+    </div>
+
+    <!-- Main content with two columns -->
+    <div class="container mt-5">
+        <div class="row justify-content-center content">
+            <!-- Column for the form -->
+            <div class="col-md-5">
+                <h1 class="main_heading">Sign in for business</h1>
+                <span class="sub_heading">Start getting great matches for your coop and internship posting.</span>
+
+				<% if (locals.error) { %>
+					<div class="d-grid alert alert-danger">
+						<%= error %>
+					</div>
+				<% } %>
+
+                <form action="/login" method="POST" id="loginForm" class="mt-4 needs-validation" novalidate>
+                    <div class="field_container mb-3 mt-5">
+                        <label for="email" class="form-label field_label">Email:</label>
+                        <input type="email" id="email" name="email" class="form-control field" placeholder="john.doe@gmail.com" required>
+                        <div class="invalid-feedback">
+                            A valid email is required.
+                        </div>
+                    </div>
+                    <div class="field_container mb-3">
+                        <label for="password" class="form-label field_label">Password:</label>
+                        <input type="password" id="password" name="password" class="form-control field" required>
+                        <div class="invalid-feedback">
+                            Password is required.
+                        </div>
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" id="remember-me" name="remember_me" class="form-check-input">
+                        <label for="remember-me" class="form-check-label">Remember Me</label>
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-primary" type="submit">Login</button>
+                    </div>
+                </form>
+                <div class="d-grid justify-content-center mt-3">
+                    <span class="normal_text">Don’t have an account? <a href="/signup" class="primary_link">Sign Up</a></span>
+                </div>
+            </div>
+
+            <!-- Column for the image -->
+            <div class="col-md-5">
+                <img src="/images/login_frame.png" alt="Description" class="img-fluid">
+            </div>
+        </div>
+    </div>
+
+    <!-- Optional Bootstrap JavaScript and Popper.js for Bootstrap tooltips and popovers -->
+    <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script>
+        (function () {
+            'use strict'
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.querySelectorAll('.needs-validation')
+
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
+    </script>
 </body>
+
 </html>

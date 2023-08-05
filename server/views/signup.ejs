@@ -1,19 +1,100 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <title>Sign Up</title>
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
+
 <body>
-  <h1>Sign Up</h1>
-  <form action="/signup" method="POST">
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required>
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required>
-    <label for="userType">User Type:</label>
-    <input type="text" id="userType" name="userType" required>
-    <button type="submit">Sign Up</button>
-  </form>
-  <a href="/login">Login</a>
+
+    <!-- Logo at the top left corner -->
+    <div class="container mt-3">
+        <img src="/images/Logowithname.png" alt="Logo" class="img-fluid logo">
+    </div>
+
+    <!-- Main content with two columns -->
+    <div class="container mt-5">
+        <div class="row justify-content-center content">
+            <!-- Column for the form -->
+            <div class="col-md-5">
+				<% if (locals.error) { %>
+					<div class="d-grid alert alert-danger mt-3">
+						<%= error %>
+					</div>
+				<% } %>
+                <h1 class="main_heading">Register your business</h1>
+                <span class="sub_heading">Sign up to find the right students for your coop and internship positions.</span>
+
+                <form action="/signup" method="POST" id="signupForm" class="mt-4 needs-validation" novalidate>
+                    <div class="field_container mb-3 mt-5">
+                        <label for="c_name" class="form-label field_label">Company Name:</label>
+                        <input type="text" id="c_name" name="c_name" class="form-control field" placeholder="X" required>
+                        <div class="invalid-feedback">
+                            Company name is required.
+                        </div>
+                    </div>
+                    <div class="field_container mb-3">
+                        <label for="email" class="form-label field_label">Email:</label>
+                        <input type="email" id="email" name="email" class="form-control field" placeholder="john.doe@gmail.com" required>
+                        <div class="invalid-feedback">
+                            A valid email is required.
+                        </div>
+                    </div>
+                    <div class="field_container mb-3">
+                        <label for="password" class="form-label field_label">Password:</label>
+                        <input type="password" id="password" name="password" class="form-control field" required>
+                        <div class="invalid-feedback">
+                            Password is required.
+                        </div>
+                    </div>
+                    <div class="field_container mb-3">
+                        <label for="cpassword" class="form-label field_label">Confirm Password:</label>
+                        <input type="password" id="cpassword" name="cpassword" class="form-control field" required>
+                        <div class="invalid-feedback">
+                            Please confirm your password.
+                        </div>
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-primary" type="submit">Sign Up</button>
+                    </div>
+                </form>
+                <div class="d-grid justify-content-center mt-3">
+                    <span class="normal_text">Already have an account? <a href="/login" class="primary_link">Login</a></span>
+                </div>
+            </div>
+
+            <!-- Column for the image -->
+            <div class="col-md-5">
+                <img src="/images/signup_frame.png" alt="Description" class="img-fluid">
+            </div>
+        </div>
+    </div>
+
+    <!-- Optional Bootstrap JavaScript and Popper.js for Bootstrap tooltips and popovers -->
+    <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script>
+        (function () {
+            'use strict'
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.querySelectorAll('.needs-validation')
+
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
+    </script>
 </body>
+
 </html>

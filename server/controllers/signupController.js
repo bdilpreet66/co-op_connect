@@ -6,14 +6,15 @@ export const signupGetController = (req, res) => {
 };
 
 export const signupPostController = async (req, res) => {
-  const { email, password, userType } = req.body;
+  const { c_name, email, password, cpassword } = req.body;
+  console.log(req.body)
 
   try {
-    const hashedPassword = await bcrypt.hash(password, 10);
     const user = new User({
+      c_name,
       email,
-      password: hashedPassword,
-      userType
+      password: password,
+      userType: "company"
     });
 
     await user.save();

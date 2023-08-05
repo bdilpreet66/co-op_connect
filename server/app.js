@@ -2,8 +2,12 @@ import express from 'express';
 import session from 'express-session';
 import mongoose from 'mongoose';
 import loginRoutes from './routes/loginRoutes.js';
+import companyRoutes from './routes/companyRoutes.js';
+import adminRoutes from './routes/adminRoutes.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import flash from 'connect-flash';
+
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -19,14 +23,22 @@ app.use(express.urlencoded({ extended: false }));
 app.use(session({
   secret: 'coopconnect',
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: false,
+  cookie: {
+      maxAge: 24 * 60 * 60 * 1000 // 1 day by default
+  }
 }));
+
+app.use(flash());
 
 
 // Serve static files
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/bootstrap', express.static(path.join(__dirname, 'node_modules/bootstrap/dist')));
 
 app.use('/', loginRoutes);
+app.use('/company', companyRoutes);
+app.use('/admin', adminRoutes);
 
 
 // Connect to MongoDB Atlas
