@@ -108,3 +108,50 @@
     border-radius: 4px;
     border: 1px solid var(--accent-1, #D0D5DD);
 }
+
+.left-navigation {
+    width: 200px;
+    height: 100vh;
+    background-color: #f7f7f7;
+    border-right: 1px solid #e0e0e0;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.left-navigation ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.left-navigation li {
+    padding: 10px 20px;
+}
+
+.left-navigation a {
+    text-decoration: none;
+    color: #333;
+    display: block;
+}
+
+.left-navigation li:hover {
+    background-color: #e0e0e0;
+}
+
+.dashboard-content {
+    margin-left: 210px; /* Adjust according to the width of the left navigation */
+}
+
+.btnContainer {
+    padding: 10px 20px;
+}
+
+.btn {
+    display: flex;
+    align-items: center; /* Vertically aligns items in the center */
+    justify-content: center; /* Horizontally aligns items in the center */
+}
+
+.btn ion-icon {
+    margin-right: 8px; /* Adds some space between the icon and the text */
+}
