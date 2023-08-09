@@ -169,7 +169,7 @@ form {
 }
 
 form div label,
-form div input:not([type="radio"]),
+form div input[type="text"],
 form div textarea,
 form div select {
     display: block;
@@ -177,7 +177,7 @@ form div select {
     
 }
 
-form div input:not([type="radio"]),
+form div input[type="text"],
 form div textarea,
 form div select {    
     border-radius: 8px;
