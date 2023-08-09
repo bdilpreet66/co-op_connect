@@ -4,6 +4,7 @@
     <title>Add Job</title>
     <!-- Add your CSS links here -->    
     <%- include('../partials/css') %>
+    <script src="https://js.stripe.com/v3/"></script>
 </head>
 <body>
     <!-- Include the left navigation -->
@@ -34,12 +35,58 @@
             <div>
                 <label for="skills">Skills (comma-separated):</label>
                 <input type="text" id="skills" name="skills">
+            </div> 
+            <div>
+                <label for="skills">Price: $10 / day</label>
             </div>            
+            <div class="border p-3 pt-0">
+                <label for="card-element">Credit or Debit Card</label>
+                <div id="card-element">
+                    <!-- A Stripe Element will be inserted here. -->
+                </div>
+                <!-- Used to display form errors. -->
+                <div id="card-errors" role="alert"></div>
+            </div>
+            <input type="hidden" id="stripeToken" name="stripeToken">
             <div class="button-container">
                 <a type="button" class="btn btn-secondary" href="jobs">Cancel</a>
                 <button type="submit" class="btn btn-primary">Create Job</button>        
             </div>
         </form>
     </div>
+
+    <script>
+        var stripe = Stripe('pk_test_mTxUvfPIEY1NmqYYxWXXcj0900NuCD976L'); // Replace with your key
+        var elements = stripe.elements();
+        var card = elements.create('card');
+        card.mount('#card-element'); // You'll need a corresponding div with this id
+
+        card.addEventListener('change', function(event) {
+            var displayError = document.getElementById('card-errors');
+            if (event.error) {
+                displayError.textContent = event.error.message;
+            } else {
+                displayError.textContent = '';
+            }
+        });
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            stripe.createToken(card).then(function(result) {
+                if (result.error) {
+                    // Handle error (e.g., show the error message to the user)
+                    var errorElement = document.getElementById('card-errors');
+                    errorElement.textContent = result.error.message;
+                } else {
+                    // Insert the token into the hidden input
+                    document.getElementById('stripeToken').value = result.token.id;
+                    
+                    // Now submit the form
+                    form.submit();
+                }
+            });
+        });
+    </script>
 </body>
 </html>

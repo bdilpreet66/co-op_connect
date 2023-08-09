@@ -19,7 +19,8 @@
     "express-session": "^1.17.3",
     "firebase-admin": "^11.10.1",
     "formvalidation": "^0.6.2-dev",
-    "mongoose": "^7.4.2"
+    "mongoose": "^7.4.2",
+    "stripe": "^12.17.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.22.9",
