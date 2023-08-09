@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Event</title>
+    <!-- Add your CSS links here -->    
+    <%- include('../partials/css') %>
+</head>
+<body>
+    <!-- Include the left navigation -->
+    <%- include('../partials/companyLeftNavigation') %>
+    <div class="right-content">
+        <h1>Create Event</h1>
+        <form action="/company/saveEvent" method="POST">
+            <div>
+                <label for="eventName">Name*:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div>
+                <label for="startDateTime">Start Date/Time*:</label>
+                <input type="datetime-local" id="startDateTime" name="start" required>
+            </div>
+            <div>
+                <label for="endDateTime">End Date/Time*:</label>
+                <input type="datetime-local" id="endDateTime" name="end" required>
+            </div>
+            <div>
+                <label for="eventDescription">Description:</label>
+                <textarea id="description" name="description"></textarea>
+            </div>
+            <div>
+                <label for="linksLocation">Links/Location:</label>
+                <input type="text" id="linkOrLocation" name="linkOrLocation">
+            </div>
+            <div>
+                <label for="eventComments">Comments:</label>
+                <textarea id="comments" name="comments"></textarea>
+            </div>
+            <div>
+                <label for="eventType">Type*:</label>
+                <select id="type" name="type" required>
+                    <option value="hackathon">hackathon</option>
+                    <option value="in-person">in-person</option>        
+                    <option value="live">live</option>
+                    <option value="webinar">webinar</option>        
+                    <!-- Add more event types if needed -->
+                </select>
+            </div>
+            <div class="button-container">
+                <a type="button" class="btn btn-secondary" href="events">Cancel</a>
+                <button type="submit" class="btn btn-primary">Create Event</button>        
+            </div>            
+        </form>
+    </div>
+    <!-- Add your JS scripts here -->
+    <%- include('../partials/javascript') %>
+</body>
+</html>

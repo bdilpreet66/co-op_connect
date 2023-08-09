@@ -1,3 +1,8 @@
+* {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+}
+
 /* Override primary color */
 :root {
     --bs-primary: #E86646;
@@ -27,7 +32,6 @@
 }
 
 
-
 .logo {
     width: 195px;
     height: 36px;
@@ -41,8 +45,7 @@
 }
 
 .main_heading {
-    color: #344054;
-    font-family: Inter;
+    color: #344054;    
     font-size: 40px;
     font-style: normal;
     font-weight: 700;
@@ -51,8 +54,7 @@
 }
 
 .sub_heading {
-    color: #667085;
-    font-family: Inter;
+    color: #667085;    
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
@@ -61,8 +63,7 @@
 }
 
 .normal_text {
-    color: var(--secondary-color, #344054);
-    font-family: Inter;
+    color: var(--secondary-color, #344054);    
     font-size: 14px;
     font-style: normal;
     font-weight: 500;
@@ -71,8 +72,7 @@
 
 .primary_link {
     color: #E86646;
-    text-align: center;
-    font-family: Inter;
+    text-align: center;    
     font-size: 14px;
     font-style: normal;
     font-weight: 600;
@@ -87,8 +87,7 @@
 }
 
 .field_label {
-    color: #344054;
-    font-family: Inter;
+    color: #344054;    
     font-size: 14px;
     font-style: normal;
     font-weight: 500;
@@ -107,6 +106,10 @@
 .field-check {
     border-radius: 4px;
     border: 1px solid var(--accent-1, #D0D5DD);
+}
+
+.right-content {
+    padding: 30px 30px 30px 230px;
 }
 
 .left-navigation {
@@ -129,13 +132,16 @@
 }
 
 .left-navigation a {
-    text-decoration: none;
-    color: #333;
-    display: block;
+    text-decoration: none;    
 }
 
 .left-navigation li:hover {
-    background-color: #e0e0e0;
+    background-color: #e0e0e0;    
+}
+
+.left-navigation li a {
+    color: #4f4f4f;
+    display: block;
 }
 
 .dashboard-content {
@@ -154,4 +160,134 @@
 
 .btn ion-icon {
     margin-right: 8px; /* Adds some space between the icon and the text */
+}
+
+form {
+    width: 50%;
+    max-width: 650px;
+    min-width: 400px;
+}
+
+form div label,
+form div input,
+form div textarea,
+form div select {
+    display: block;
+    width: 100%;
+    
+}
+
+form div input,
+form div textarea,
+form div select {    
+    border-radius: 8px;
+    border: 1px solid #D0D5DD;   
+    padding: 5px 8px;
+}
+
+form div label {
+    margin-top: 20px;
+}
+
+a.link {    
+    text-decoration: none;       
+}
+
+a.link .edit {
+    color: #D6553C;
+}
+
+td .delete {
+    color: red
+}
+
+td ion-icon {
+    font-size: 18px;
+    padding: 0 4px; 
+    cursor: pointer;
+}
+
+form .button-container {
+    margin-top: 30px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px; /* This will add a space between the buttons */
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* This will vertically align the items if they have different heights */
+}
+
+.right-content h1 {
+    font-size: 20px;
+}
+
+.job-box {
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);    
+    overflow-x: scroll;        
+    position: relative;    
+}
+
+.job-box p {
+    margin-bottom: 5px;    
+    display: flex;
+    align-items: center;    
+}
+
+.job-box p ion-icon {
+    margin-right: 5px;    
+}
+
+.job-box a {
+    color: #3D7A9C;
+    text-decoration: none;
+    width: 100%;
+}
+
+.job-container {
+    gap: 10px;            
+}
+
+.badge {
+    padding: 4px 8px;
+    border-radius: 8px;    
+    font-weight: 400;
+}
+
+.open {
+    background-color: #06a120;
+}
+
+.closed {
+    background-color: #4f4f4f;
+}
+
+.event-button-container {
+    position: absolute;
+    bottom: 10px;
+    right: 15px;
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.event-button-container .btn {
+    width: 50%;
+}
+
+.btn-delete {
+    background-color: #F5F5F5;
+    color: #C03636;
+    font-size: 12px;
+}
+
+.btn-delete:hover {
+    background-color: #f7eeee;
+    color: #C03636;    
 }

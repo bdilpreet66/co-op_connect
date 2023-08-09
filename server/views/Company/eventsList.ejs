@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Events List</title>    
+    <!-- Add your CSS links here -->    
+    <%- include('../partials/css') %>
+</head>
+<body>
+    <!-- Include the left navigation -->
+    <%- include('../partials/companyLeftNavigation') %>
+    <div class="right-content">
+        <div class="header-container">
+            <h1>All Events</h1>
+            <a class="btn btn-primary" href="addEvent">Create Event</a>
+        </div>
+        <div class="job-container row">
+            <% events.forEach(event => { %>
+                <div class="job-box col-md-4 col-sm-6 col-lg-3 col-xl-2 col-12 ">
+                    <h5><a class="link" href="/company/event/edit/<%= event._id %>"><%= event.name %></a></h5>
+                    <p>
+                        <ion-icon name="time-outline"></ion-icon>
+                        <span>Start:&nbsp;</span>
+                        <%= new Date(event.start).toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' }) + ' ' + new Date(event.start).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false }) %>
+                    </p>
+                    <p>
+                        <ion-icon name="time-outline"></ion-icon>
+                        <span>End:&nbsp;</span>
+                        <%= new Date(event.end).toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' }) + ' ' + new Date(event.end).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false }) %>
+                    </p>
+                    <p><ion-icon name="locate-outline"></ion-icon><%= event.linkOrLocation %></p>                    
+                    <p style="margin-bottom: 50px;"><ion-icon name="information-circle-outline"></ion-icon> <%= event.type %></p>
+                    <p class="event-button-container">
+                        <button type="button" class="btn btn-delete" data-bs-toggle="modal" data-bs-target="#deleteModal" data-event-id="<%= event._id %>">Delete</button>                        
+                    </p>
+                </div>
+            <% }); %>
+        </div>           
+    </div>
+    <!-- Delete Confirmation Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete this event?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <a href="#" class="btn btn-danger" id="confirmDelete">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Add your JS scripts here -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var deleteIcons = document.querySelectorAll('.delete');
+            var confirmDeleteButton = document.getElementById('confirmDelete');
+            var eventIdToDelete;
+
+            deleteIcons.forEach(function(icon) {
+                icon.addEventListener('click', function() {
+                    eventIdToDelete = icon.getAttribute('data-event-id');
+                    console.log('eventIdToDelete', eventIdToDelete);
+                });
+            });            
+
+            confirmDeleteButton.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent the default action (navigation)
+
+                fetch("event/delete/" + eventIdToDelete, {
+                    method: 'DELETE',
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        location.reload(); // Reload the page to reflect the deletion
+                    } else {
+                        alert('Error deleting event.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error deleting event.');
+                });
+            });
+        });
+    </script>
+    <%- include('../partials/javascript') %>
+</body>
+</html>

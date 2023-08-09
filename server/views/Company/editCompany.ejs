@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Company Profile</title>
+    <!-- Add your CSS links here -->    
+    <%- include('../partials/css') %>
+</head>
+<body>
+    <!-- Include the left navigation -->
+    <%- include('../partials/companyLeftNavigation') %>
+    <div class="right-content">
+        <h1>Company Profile</h1>
+        
+        <form action="/company/company/edit/<%= company._id %>" method="POST">
+            <div>
+                <label>Name: </label>
+                <input type="text" name="name" value="<%= company.name %>">
+            </div>
+            <div>
+                <label>Email: </label>
+                <input type="email" name="email" value="<%= company.email %>">
+            </div>
+            <div>
+                <label>Phone Number: </label>
+                <input type="text" name="phoneNumber" value="<%= company.phoneNumber %>">
+            </div>
+            <div>
+                <label>Additional Info: </label>
+                <textarea name="additionalInfo" rows="6"><%= company.additionalInfo %></textarea>
+            </div>            
+            <div class="button-container">
+                <a type="button" class="btn btn-secondary" href="/company/dashboard">Cancel</a>
+                <button type="submit" class="btn btn-primary">Update Profile</button>        
+            </div>
+        </form>
+    </div>
+    <!-- Add your JS scripts here -->
+    <%- include('../partials/javascript') %>
+    <% if (typeof successMessage !== 'undefined' && successMessage) { %>
+        <!-- Bootstrap Modal -->
+        <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="successModalLabel">Success</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <%= successMessage %>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            var successModal = new bootstrap.Modal(document.getElementById('successModal'));
+            successModal.show();
+    
+            setTimeout(() => {
+                successModal.hide();
+            }, 2000);
+        </script>
+    <% } %>
+</body>
+</html>

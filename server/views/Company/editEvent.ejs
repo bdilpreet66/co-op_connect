@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Event</title>
+    <!-- Add your CSS links here -->    
+    <%- include('../partials/css') %>
+</head>
+<body>
+    <!-- Include the left navigation -->
+    <%- include('../partials/companyLeftNavigation') %>
+    <div class="right-content">
+        <h1>Edit Event</h1>
+        <form action="/company/event/edit/<%= event._id %>" method="POST">
+            <div>
+                <label for="name">Name*:</label>
+                <input type="text" id="name" name="name" value="<%= event.name %>" required>
+            </div>
+            <div>
+                <label for="start">Start Date/Time*:</label>
+                <input type="datetime-local" id="start" name="start" value="<%= new Date(event.start).toISOString().slice(0,16) %>" required>
+            </div>    
+            <div>
+                <label for="end">End Date/Time*:</label>
+                <input type="datetime-local" id="end" name="end" value="<%= new Date(event.end).toISOString().slice(0,16) %>" required>
+            </div>
+            <div>
+                <label for="description">Description:</label>
+                <textarea id="description" name="description"><%= event.description %></textarea>
+            </div>
+            <div>
+                <label for="linkOrLocation">Link/Location:</label>
+                <input type="text" id="linkOrLocation" name="linkOrLocation" value="<%= event.linkOrLocation %>">
+            </div>
+            <div>
+                <label for="comments">Comments:</label>
+                <textarea id="comments" name="comments"><%= event.comments %></textarea>
+            </div>
+            <div>
+                <label for="type">Type*:</label>
+                <select id="type" name="type" required>
+                    <option value="in-person" <%= event.type === 'in-person' ? 'selected' : '' %>>In-person</option>
+                    <option value="live" <%= event.type === 'live' ? 'selected' : '' %>>Live</option>
+                    <option value="webinar" <%= event.type === 'webinar' ? 'selected' : '' %>>Webinar</option>
+                    <option value="hackathon" <%= event.type === 'hackathon' ? 'selected' : '' %>>Hackathon</option>
+                </select>
+            </div>            
+            <div class="button-container">
+                <a type="button" class="btn btn-secondary" href="/company/events">Cancel</a>
+                <button type="submit" class="btn btn-primary">Update Event</button>        
+            </div>
+        </form>
+    </div>
+    <!-- Add your JS scripts here -->
+    <%- include('../partials/javascript') %>
+</body>
+</html>

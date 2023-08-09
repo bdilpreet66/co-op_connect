@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Jobs List</title>
+    <!-- Add your CSS links here -->    
+    <%- include('../partials/css') %>
+</head>
+<body>
+    <!-- Include the left navigation -->
+    <%- include('../partials/companyLeftNavigation') %>
+    <div class="right-content">
+        <div class="header-container">
+            <h1>Jobs List</h1>
+            <div class="btnContainer">
+                <a type="button" class="btn btn-primary" href="/company/addJob"><ion-icon name="add-outline"></ion-icon>Post a Job</a>
+            </div>
+        </div>
+        <br>
+        <div class="job-container row">
+        <% jobs.forEach(job => { %>
+            <div class="job-box col-md-4 col-sm-6 col-lg-2 col-12 ">
+                <h5><a href="/company/job/edit/<%= job._id %>"><%= job.jobTitle %></a></h5>
+                <p><span class="badge <%= job.status %>"><%= job.status %></span></p>
+                <p><ion-icon name="briefcase-outline"></ion-icon><%= job.workSetup %></p>
+                <p><ion-icon name="location-outline"></ion-icon><%= job.jobLocation %></p>                
+                <p><ion-icon name="list-outline"></ion-icon><%= job.skills.join(', ') %></p>    
+                <p><ion-icon name="people-outline"></ion-icon><a href="/company/job/<%= job._id %>/candidates"><%= job.candidateCount %> candidates applied</a></p>
+            </div>
+        <% }); %>
+        </div>
+    </div>
+    <%- include('../partials/javascript') %>
+</body>
+</html>

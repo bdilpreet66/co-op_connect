@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import loginRoutes from './routes/loginRoutes.js';
 import companyRoutes from './routes/companyRoutes.js';
 import adminRoutes from './routes/adminRoutes.js';
+
 import path from 'path';
 import { fileURLToPath } from 'url';
 import flash from 'connect-flash';

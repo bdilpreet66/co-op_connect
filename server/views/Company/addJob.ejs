@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Job</title>
+    <!-- Add your CSS links here -->    
+    <%- include('../partials/css') %>
+</head>
+<body>
+    <!-- Include the left navigation -->
+    <%- include('../partials/companyLeftNavigation') %>
+    <div class="right-content">
+        <h1>Add a New Job</h1>
+        <form action="/company/saveJob" method="POST">
+            <div>
+                <label for="jobTitle">Job Title*:</label>
+                <input type="text" id="jobTitle" name="jobTitle" required>
+            </div>
+            <div>
+                <label for="workSetup">Work Setup*:</label>
+                <select id="workSetup" name="workSetup">
+                    <option value="Hybrid">Hybrid</option>
+                    <option value="Remote">Remote</option>
+                    <option value="In-Office">In-Office</option>
+                </select>
+            </div>
+            <div>
+                <label for="jobLocation">Job Location*:</label>
+                <input type="text" id="jobLocation" name="jobLocation" required>
+            </div>
+            <div>
+                <label for="jobDescription">Job Description*:</label>
+                <textarea id="jobDescription" name="jobDescription" rows="15" required></textarea>
+            </div>
+            <div>
+                <label for="skills">Skills (comma-separated):</label>
+                <input type="text" id="skills" name="skills">
+            </div>            
+            <div class="button-container">
+                <a type="button" class="btn btn-secondary" href="jobs">Cancel</a>
+                <button type="submit" class="btn btn-primary">Create Job</button>        
+            </div>
+        </form>
+    </div>
+</body>
+</html>

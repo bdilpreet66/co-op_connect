@@ -3,17 +3,20 @@
 
 <head>
     <title>Dashboard</title>
-    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/styles.css">
+    <!-- Add your CSS links here -->    
+    <%- include('../partials/css') %>
 </head>
 
 <body>
     <!-- Include the left navigation -->
-    <%- include('../partials/companyLeftNavigation') %>    
-    <!-- Optional Bootstrap JavaScript and Popper.js for Bootstrap tooltips and popovers -->
-    <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <%- include('../partials/companyLeftNavigation') %>
+
+    <div class="right-content">
+        This is the company dashboard
+    </div>
+
+    <!-- Add your JS scripts here -->
+    <%- include('../partials/javascript') %>
 </body>
 
 </html>

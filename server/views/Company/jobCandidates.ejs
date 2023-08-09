@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Candidates for Job</title>    
+    <!-- Add your CSS links here -->    
+    <%- include('../partials/css') %>
+</head>
+<body>
+    <!-- Include the left navigation -->
+    <%- include('../partials/companyLeftNavigation') %>    
+    <div class="right-content">    
+        <h1>Candidates who applied for the job</h1>
+        <div>Job Posting: <b><%= jobTitle %></b></div>
+        <div class="job-container row">
+            <% candidates.forEach(candidate => { %>
+                <div class="job-box col-md-4 col-sm-6 col-lg-2 col-12 ">
+                    <h5><a href="/company/job/edit/<%= candidate._id %>"><%= candidate.firstName %> <%= candidate.lastName %></a></h5>                    
+                    <p><ion-icon name="trophy-outline"></ion-icon><%= candidate.jobTitle %></p>
+                    <p><ion-icon name="card-outline"></ion-icon><%= candidate.course %></p>
+                    <p><ion-icon name="school-outline"></ion-icon><%= candidate.school %></p>
+                    <p><ion-icon name="list-outline"></ion-icon><%= candidate.skills.join(', ') %></p>                    
+                </div>
+            <% }); %>
+        </div>
+    </div>
+    <%- include('../partials/javascript') %>
+</body>
+</html>

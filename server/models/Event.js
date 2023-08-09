@@ -5,17 +5,25 @@ const eventSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    dateTime: {
-        start: Date,
-        end: Date
+    start: {
+        type: Date,
+        required: true
+    },
+    end: {
+        type: Date,
+        required: true
     },
     description: String,
-    linkLocation: String,
+    linkOrLocation: String,
     comments: String,
     type: {
         type: String,
         enum: ['in-person', 'live', 'webinar','hackathon'], // Add your event types here
         required: true
+    },
+    createdDate: {
+        type: Date,
+        default: Date.now
     }
 });
 
