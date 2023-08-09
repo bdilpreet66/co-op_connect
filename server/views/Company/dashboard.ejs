@@ -1,22 +1,64 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <title>Dashboard</title>
+    <title>Jobs List</title>
     <!-- Add your CSS links here -->    
     <%- include('../partials/css') %>
 </head>
-
 <body>
     <!-- Include the left navigation -->
     <%- include('../partials/companyLeftNavigation') %>
-
     <div class="right-content">
-        This is the company dashboard
+        <div class="header-container">
+            <h1>Open Jobs</h1>
+            <div class="btnContainer">
+                <a type="button" class="btn btn-primary" href="/company/addJob"><ion-icon name="add-outline"></ion-icon>Post a Job</a>
+            </div>
+        </div>
+        <br>
+        <div class="job-container row">
+        <% openJobs.forEach(job => { %>
+            <div class="job-box col-md-4 col-sm-6 col-lg-2 col-12 ">
+                <h5><a href="/company/job/edit/<%= job._id %>"><%= job.jobTitle %></a></h5>
+                <p><span class="badge <%= job.status %>"><%= job.status %></span></p>
+                <p><ion-icon name="briefcase-outline"></ion-icon><%= job.workSetup %></p>
+                <p><ion-icon name="location-outline"></ion-icon><%= job.jobLocation %></p>                
+                <p><ion-icon name="list-outline"></ion-icon><%= job.skills.join(', ') %></p>    
+                <p><ion-icon name="people-outline"></ion-icon><a href="/company/job/<%= job._id %>/candidates"><%= job.candidateCount %> candidates applied</a></p>
+            </div>
+        <% }); %>
+        </div>
+        <hr>
+        <div class="header-container">
+            <h1>Open and Incoming Events</h1>
+            <div class="btnContainer">
+                <a class="btn btn-primary" href="addEvent">Create Event</a>
+            </div>
+        </div>
+        <br>
+        <div class="job-container row">
+            <% openEvents.forEach(event => { %>
+                <div class="job-box col-12 col-sm-6 col-md-4 col-lg-3">
+                    <h5><a class="link" href="/company/event/edit/<%= event._id %>"><%= event.name %></a></h5>
+                    <p>
+                        <ion-icon name="time-outline"></ion-icon>
+                        <span>Start:&nbsp;</span>
+                        <%= new Date(event.start).toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' }) + ' ' + new Date(event.start).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false }) %>
+                    </p>
+                    <p>
+                        <ion-icon name="time-outline"></ion-icon>
+                        <span>End:&nbsp;</span>
+                        <%= new Date(event.end).toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' }) + ' ' + new Date(event.end).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false }) %>
+                    </p>
+                    <p><ion-icon name="locate-outline"></ion-icon><%= event.linkOrLocation %></p>                    
+                    <p style="margin-bottom: 50px;"><ion-icon name="information-circle-outline"></ion-icon> <%= event.type %></p>
+                    <p class="event-button-container">
+                        <button type="button" class="btn btn-delete" data-bs-toggle="modal" data-bs-target="#deleteModal" data-event-id="<%= event._id %>">Delete</button>                        
+                    </p>
+                </div>
+            <% }); %>
+        </div>
     </div>
-
-    <!-- Add your JS scripts here -->
     <%- include('../partials/javascript') %>
 </body>
-
 </html>

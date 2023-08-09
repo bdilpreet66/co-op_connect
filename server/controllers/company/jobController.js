@@ -4,7 +4,7 @@ import CandidateProfile from '../../models/CandidateProfile.js';
 
 
 export const getAddJob = (req, res) => {
-    res.render('company/addJob');   
+    res.render('company/addJob',{activeMenu:'jobs'});   
 };
 
 export const postAddJob = async (req, res) => {
@@ -39,7 +39,7 @@ export const getJobs = async (req, res) => {
             };
         }));
 
-        res.render('company/jobsList', { jobs: jobsWithCounts });        
+        res.render('company/jobsList', { jobs: jobsWithCounts, activeMenu: 'jobs' });        
     } catch (error) {
         console.error("Error fetching jobs:", error);
         res.status(500).send("Internal Server Error");
@@ -53,7 +53,7 @@ export const getEditJob = async (req, res) => {
         if (!job) {
             return res.status(404).send('Job not found');
         }
-        res.render('company/editJob', { job });
+        res.render('company/editJob', { job:job, activeMenu:'jobs' });
     } catch (error) {
         console.error("Error fetching job:", error);
         res.status(500).send("Internal Server Error");
@@ -99,7 +99,8 @@ export const getCandidatesForJob = async (req, res) => {
 
         res.render('company/jobCandidates', { 
             candidates, 
-            jobTitle: job.jobTitle  // Pass the job name to the view
+            jobTitle: job.jobTitle,  // Pass the job name to the view
+            activeMenu: 'jobs'
         }); 
         
     } catch (error) {

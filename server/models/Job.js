@@ -5,6 +5,24 @@ const jobSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    /*compensationType: {
+        type: String,
+        enum: ['unpaid', 'paid'],
+        required: true
+    },
+    rateType: {
+        type: String,
+        enum: ['hourly', 'annual'],
+        required: function() { return this.compensationType === 'paid'; }
+    },
+    hourlyRate: {
+        type: Number,
+        required: function() { return this.rateType === 'hourly'; }
+    },
+    annualRate: {
+        type: Number,
+        required: function() { return this.rateType === 'annual'; }
+    },*/
     workSetup: {
         type: String,
         enum: ['Hybrid', 'Remote', 'In-Office'],

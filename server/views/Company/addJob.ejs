@@ -11,10 +11,33 @@
     <%- include('../partials/companyLeftNavigation') %>
     <div class="right-content">
         <h1>Add a New Job</h1>
-        <form action="/company/saveJob" method="POST">
+        <form action="/company/saveJob" method="POST" id="frmAddJob">
             <div>
                 <label for="jobTitle">Job Title*:</label>
                 <input type="text" id="jobTitle" name="jobTitle" required>
+            </div>
+            <div>
+                <label>Compensation:</label>
+                <div style="display: flex;">
+                    <input type="radio" name="compensationType" id="unpaid" value="unpaid" checked>
+                    <label for="unpaid">&nbsp;Unpaid</label>
+                </div>
+                <div style="display: flex;">
+                    <input type="radio" name="compensationType" id="paid" value="paid">
+                    <label for="paid">&nbsp;Paid</label>
+                </div>
+                <div id="compensationDetails" style="display: none;">
+                    <div style="display: flex;">
+                        <input type="radio" name="rateType" id="hourly" value="hourly" checked>
+                        <label for="hourly" class="mt-2">&nbsp;Hourly:</label>
+                        <input type="text" id="hourlyRate" name="hourlyRate" placeholder="$ per hour">
+                    </div>
+                    <div style="display: flex;">
+                        <input type="radio" name="rateType" id="annual" value="annual">
+                        <label for="annual" class="mt-2">&nbsp;Annually:</label>
+                        <input type="text" id="annualRate" name="annualRate" placeholder="$ per year">
+                    </div>
+                </div>
             </div>
             <div>
                 <label for="workSetup">Work Setup*:</label>
@@ -37,8 +60,16 @@
                 <input type="text" id="skills" name="skills">
             </div> 
             <div>
-                <label for="skills">Price: $10 / day</label>
-            </div>            
+                <span>Plan:</span>
+                <div>
+                    <input type="radio" name="plan" id="plan1" value="5" checked="checked">
+                    <span for="plan1">$5 per day</span>
+                </div>
+                <div>
+                    <input type="radio" name="plan" id="plan2" value="10">
+                    <span for="plan2">$10 per day (your post will appear on top of the search results)</span>
+                </div>
+            </div>
             <div class="border p-3 pt-0">
                 <label for="card-element">Credit or Debit Card</label>
                 <div id="card-element">
@@ -58,6 +89,7 @@
     <script>
         var stripe = Stripe('pk_test_mTxUvfPIEY1NmqYYxWXXcj0900NuCD976L'); // Replace with your key
         var elements = stripe.elements();
+        var form = document.getElementById('frmAddJob');
         var card = elements.create('card');
         card.mount('#card-element'); // You'll need a corresponding div with this id
 
@@ -87,6 +119,16 @@
                 }
             });
         });
+
+        // Use JavaScript to toggle the display of compensation details based on the selected compensation type
+        document.getElementById('paid').addEventListener('change', function() {
+            document.getElementById('compensationDetails').style.display = 'block';
+        });
+
+        document.getElementById('unpaid').addEventListener('change', function() {
+            document.getElementById('compensationDetails').style.display = 'none';
+        });
     </script>
+    <%- include('../partials/javascript') %>
 </body>
 </html>

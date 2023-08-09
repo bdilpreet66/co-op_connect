@@ -8,9 +8,9 @@
     <div class="btnContainer">
         <a type="button" class="btn btn-primary" href="/company/addJob"><ion-icon name="add-outline"></ion-icon>Post a Job</a>
     </div>
-    <ul>         
-        <li><a href="/company/company/edit/64d19c5b99241bc3544aaece">Profile</a></li>
-        <li><a href="/company/jobs">Jobs</a></li>
-        <li><a href="/company/events">Events</a></li>
-    </ul>
+    <ul>
+        <li class="<%= activeMenu === 'jobs' ? 'active' : '' %>"><a href="/company/jobs">Jobs</a></li>
+        <li class="<%= activeMenu === 'events' ? 'active' : '' %>"><a href="/company/events">Events</a></li>
+        <li class="<%= activeMenu === 'profile' ? 'active' : '' %>"><a href="/company/company/edit/64d19c5b99241bc3544aaece">Profile</a></li>
+    </ul>    
 </nav>

@@ -1,7 +1,7 @@
 import Event from '../../models/Event.js';
 
 export const addEvent = (req, res) => {
-    res.render('Company/addEvent');
+    res.render('Company/addEvent',{ activeMenu: 'events'});
 };
 
 export const saveEvent = async (req, res) => {    
@@ -26,7 +26,7 @@ export const saveEvent = async (req, res) => {
 export const getAllEvents = async (req, res) => {
     try {
         const events = await Event.find();
-        res.render('company/eventsList', { events });
+        res.render('company/eventsList', { events: events, activeMenu: 'events' });
     } catch (error) {
         res.status(500).send('Failed to fetch events.');
     }
@@ -35,7 +35,7 @@ export const getAllEvents = async (req, res) => {
 export const getEditEvent = async (req, res) => {
     try {
         const event = await Event.findById(req.params.id);
-        res.render('company/editEvent', { event });
+        res.render('company/editEvent', { event:event, activeMenu: 'events' });
     } catch (error) {
         res.status(500).send('Failed to fetch the event.');
     }

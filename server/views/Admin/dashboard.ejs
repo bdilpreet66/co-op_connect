@@ -1,0 +1,23 @@
+<!-- views/admin/dashboard.ejs -->
+
+<h1>Admin Dashboard</h1>
+
+<h2>Open Job Postings</h2>
+<ul>
+    <% openJobs.forEach(job => { %>
+        <li>
+            <h3><%= job.jobTitle %></h3>
+            <!-- Add other job details here -->
+        </li>
+    <% }); %>
+</ul>
+
+<h2>Open Events</h2>
+<ul>
+    <% openEvents.forEach(event => { %>
+        <li>
+            <h3><%= event.name %></h3>
+            <!-- Add other event details here -->
+        </li>
+    <% }); %>
+</ul>

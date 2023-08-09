@@ -169,7 +169,7 @@ form {
 }
 
 form div label,
-form div input,
+form div input:not([type="radio"]),
 form div textarea,
 form div select {
     display: block;
@@ -177,7 +177,7 @@ form div select {
     
 }
 
-form div input,
+form div input:not([type="radio"]),
 form div textarea,
 form div select {    
     border-radius: 8px;
@@ -185,7 +185,7 @@ form div select {
     padding: 5px 8px;
 }
 
-form div label {
+form div {
     margin-top: 20px;
 }
 
@@ -278,7 +278,7 @@ form .button-container {
 }
 
 .event-button-container .btn {
-    width: 50%;
+    width: 30%;
 }
 
 .btn-delete {
@@ -290,4 +290,8 @@ form .button-container {
 .btn-delete:hover {
     background-color: #f7eeee;
     color: #C03636;    
+}
+
+.left-navigation ul li.active a {
+    color: #D6553C;
 }
