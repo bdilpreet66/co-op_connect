@@ -30,7 +30,7 @@
                     <p><ion-icon name="locate-outline"></ion-icon><%= event.linkOrLocation %></p>                    
                     <p style="margin-bottom: 50px;"><ion-icon name="information-circle-outline"></ion-icon> <%= event.type %></p>
                     <p class="event-button-container">
-                        <button type="button" class="btn btn-delete" data-bs-toggle="modal" data-bs-target="#deleteModal" data-event-id="<%= event._id %>">Delete</button>                        
+                        <button type="button" class="btn btn-delete" data-bs-toggle="modal" data-bs-target="#deleteModal" data-event-id="<%= event._id %>">Delete</button>
                     </p>
                 </div>
             <% }); %>
@@ -57,7 +57,7 @@
     <!-- Add your JS scripts here -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            var deleteIcons = document.querySelectorAll('.delete');
+            var deleteIcons = document.querySelectorAll('.btn-delete');
             var confirmDeleteButton = document.getElementById('confirmDelete');
             var eventIdToDelete;
 
