@@ -1,0 +1,30 @@
+<link rel="stylesheet" href="/css/adminNavbar.css">
+
+<div class="sidebar" id="sidebar">
+    <!-- Hamburger menu -->
+    <div class="menu-icon-wrapper" onclick="toggleSidebar()">
+        <img src="/images/hamburgermenu.svg" alt="Menu" class="menu-icon">
+    </div>
+
+    <!-- Main Menu Title -->
+    <div class="main-menu-title">MAIN MENU</div>
+
+    <ul class="menu-list">
+        <li><a class="btn btn-primary text-white" href="">Create Exam</a></li>
+        <li class="<%= activeMenu === 'user' ? 'active' : '' %>"><a href="/admin/users">Approve users</a></li>
+        <li class="<%= activeMenu === 'school' ? 'active' : '' %>"><a href="/admin/schools">Schools</a></li>
+        <li class="<%= activeMenu === 'exam' ? 'active' : '' %>"><a href="/admin/exams">Skill Requests</a></li>
+    </ul>
+</div>
+
+<script>
+    function toggleSidebar() {
+        const sidebar = document.getElementById('sidebar');
+        console.log(sidebar.style.width)
+        if (sidebar.style.width == "80px"){
+            sidebar.style.width = "max-content";
+        } else {
+            sidebar.style.width = "80px";
+        }
+    }
+</script>

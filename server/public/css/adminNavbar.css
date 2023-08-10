@@ -1,0 +1,83 @@
+/* adminNavbar.css */
+
+/* Sidebar styling */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 20px;
+    height: 100vh;
+    width: max-content;
+    background: white;
+    box-shadow: 18px 4px 35px rgba(0, 0, 0, 0.02);
+    transition: width 0.3s ease-in-out;
+    z-index: 1000;
+    overflow-x: hidden; /* Prevents horizontal scrolling */
+    overflow-y: auto; /* Allows vertical scrolling if content overflows */
+}
+
+.sidebar.collapsed {
+    width: 50px;
+}
+
+.menu-icon-wrapper {
+    cursor: pointer;
+    width: 46px;
+    height: 46px;
+    margin-top: 46px;
+    margin-left: auto;
+    margin-bottom: 20px;
+}
+
+.menu-icon {
+    width: 100%; /* Makes the image scale to its container */
+    height: 100%;
+}
+
+/* Main Menu title */
+.main-menu-title {
+    color: #344054;
+    font-size: 16px;
+    font-family: Inter;
+    font-weight: 700;
+    letter-spacing: 1px;
+    left: 42px;
+    top: 132px;
+    margin: 0px 70px;
+}
+
+/* Menu items */
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    left: 42px;
+    font-size: 12px;
+    font-family: Inter;
+    font-weight: 600;
+    line-height: 20px;
+}
+
+.link-text {
+    color: #3D7A9C;
+}
+
+.menu-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 60px;
+    left: 42px;
+}
+
+.menu-list li {
+    margin-bottom: 20px; /* Space between list items */
+}
+
+.menu-list li a {
+    color: #777777;
+    text-decoration: none;
+}
+
+.menu-list li.active a {
+    color: #344054; /* Active color */
+}
