@@ -162,11 +162,6 @@
     margin-right: 8px; /* Adds some space between the icon and the text */
 }
 
-form {
-    width: 50%;
-    max-width: 650px;
-    min-width: 400px;
-}
 
 form div label,
 form div input[type="text"],

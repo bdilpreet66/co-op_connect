@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List of Schools</title>    
+    <%- include('../partials/css') %>
+</head>
+<body>
+    <!-- Include the left navigation -->
+    <%- include('../partials/adminNavbar') %>
+    <div class="container mt-4">
+        <div class="container mt-3 mb-3">
+            <div class="row justify-content-between align-items-center">
+                <div class="col-auto">
+                    <a href="/admin/dashboard">
+                        <img src="/images/Logowithname.png" alt="Logo" class="img-fluid logo">
+                    </a>
+                </div>
+                <div class="col-auto text-right">
+                    <span class="blockquote">Username</span>
+                    <a href="/" class="blockquote text-decoration-none text-secondary">&nbsp;&nbsp;&nbsp;&nbsp;Logout</a>
+                </div>
+            </div>
+            <div class="row justify-content-between align-items-center" style="margin-top: 100px;">
+                <div class="col-auto">
+                    <h1>List of Schools</h1>
+                </div>
+                <div class="col-auto text-right">
+                    <a href="/admin/schools/add" class="btn btn-primary mb-2">Create New School</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <input type="text" class="form-control" id="searchInput" placeholder="Search for schools...">
+        </div>
+
+        <!-- Schools Table -->
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Domain</th>
+                    <th>Subscription Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="schoolsTableBody">
+                <% schools.forEach(school => { %>
+                    <tr>
+                        <td><%= school.name %></td>
+                        <td><%= school.domain %></td>
+                        <td><%= school.subscriptionStatus %></td>
+                        <td>
+                            <a href="/school/edit/<%= school._id %>" class="btn btn-warning">Edit</a>
+                            <a href="/school/delete/<%= school._id %>" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </div>
+
+    <%- include('../partials/javascript') %>
+    <!-- Search Filtering Script -->
+    <script>
+        document.getElementById('searchInput').addEventListener('keyup', function(event) {
+            if(event.key === "Enter") {
+                window.location.href = '/listSchools?search=' + this.value;
+            }
+        });
+    </script>
+</body>
+
+</html>
