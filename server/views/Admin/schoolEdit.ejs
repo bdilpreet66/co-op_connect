@@ -26,7 +26,7 @@
             </div>
             <div class="row justify-content-between align-items-center" style="margin-top: 100px;">
                 <div class="col-auto">
-                    <h1>Add a School</h1>
+                    <h1>Edit a School</h1>
                 </div>
                 <div class="col-auto text-right">
                 </div>
@@ -34,45 +34,49 @@
         </div>
         
         <!-- Form to Add a New School -->
-        <form action="/school/create" method="POST">
+        <form action="/admin/schools/edit/<%= school._id %>" method="POST">
             <div class="mb-3">
                 <label for="name" class="form-label">School Name</label>
-                <input type="text" class="form-control" id="name" name="name" required>
+                <input type="text" class="form-control" id="name" name="name" value="<%= school.name %>" required>
             </div>
             <div class="mb-3">
                 <label for="domain" class="form-label">School Domain</label>
-                <input type="text" class="form-control" id="domain" name="domain" required>
+                <input type="text" class="form-control" id="domain" name="domain" value="<%= school.domain %>" required>
             </div>
             <div class="mb-3">
-                <label for="subscriptionStatus" class="form-label">Subscription Status</label>
-                <select class="form-control" id="subscriptionStatus" name="subscriptionStatus">
-                    <option value="active">Active</option>
-                    <option value="pending">Pending</option>
-                    <option value="expired">Expired</option>
-                </select>
+                <label for="contact" class="form-label">School Email</label>
+                <input type="email" class="form-control" id="contact" name="contact" value="<%= school.contact %>" required>
             </div>
-            <button type="submit" class="btn btn-primary">Add School</button>
+            <% if (school.subscriptionStatus === 'pending') { %>
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Stripe Payment Link</h5>
+                        <div class="input-group mb-3">
+                            <input type="text" id="stripeLinkInput" value="http://localhost:3000/admin/schools/payment/<%= school._id %>" class="form-control" readonly>
+                            <span class="input-group-text" id="copy-btn" style="cursor: pointer;">Copy</span>
+                        </div>
+                    </div>
+                </div>
+            <% } %>
+            <button type="submit" class="btn btn-primary">Update School</button>
         </form>
     </div>
     
     <%- include('../partials/javascript') %>
     <script>
-        fetch('/school/create', {
-            method: 'POST',
-            body: JSON.stringify({ 
-                "name": document.getElementById("name").value,
-                "domain": document.getElementById("domain").value,
-             }),
-            headers: {
-                'Content-Type': 'application/json'
-            }
+        document.getElementById("copy-btn").addEventListener("click", (e)=>{
+            // Get the input field
+            const inputField = document.getElementById('stripeLinkInput');
+
+            // Select the text in the input field
+            inputField.select();
+
+            // Copy the selected text
+            document.execCommand('copy');
+
+            // (Optional) Alert the copied text
+            alert('Copied the text: ' + inputField.value);
         })
-        .then(res => res.json())
-        .then(data => {
-            const checkoutUrl = data.checkoutUrl;
-            // Display the checkoutUrl on the page or allow the admin to email it
-            document.getElementById('stripeLink').href = checkoutUrl;
-        });
     </script>
 </body>
 </html>
