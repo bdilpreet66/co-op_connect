@@ -11,6 +11,10 @@ const SchoolSchema = new mongoose.Schema({
     required: true,
     unique: true
   },
+  contact: {
+    type: String,
+    required: true,
+  },
   subscriptionStatus: {
     type: String, // Can be 'active', 'pending', 'expired', etc.
     required: true,

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add New School</title>
+    <title>Edit School</title>
     <%- include('../partials/css') %>
 </head>
 <body>
@@ -44,13 +44,35 @@
                 <input type="text" class="form-control" id="domain" name="domain" required>
             </div>
             <div class="mb-3">
-                <label for="contact" class="form-label">School Email</label>
-                <input type="email" class="form-control" id="contact" name="contact" required>
+                <label for="subscriptionStatus" class="form-label">Subscription Status</label>
+                <select class="form-control" id="subscriptionStatus" name="subscriptionStatus">
+                    <option value="active">Active</option>
+                    <option value="pending">Pending</option>
+                    <option value="expired">Expired</option>
+                </select>
             </div>
             <button type="submit" class="btn btn-primary">Add School</button>
         </form>
     </div>
     
     <%- include('../partials/javascript') %>
+    <script>
+        fetch('/school/create', {
+            method: 'POST',
+            body: JSON.stringify({ 
+                "name": document.getElementById("name").value,
+                "domain": document.getElementById("domain").value,
+             }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+            const checkoutUrl = data.checkoutUrl;
+            // Display the checkoutUrl on the page or allow the admin to email it
+            document.getElementById('stripeLink').href = checkoutUrl;
+        });
+    </script>
 </body>
 </html>

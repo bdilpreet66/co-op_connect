@@ -30,35 +30,24 @@ export const schoolCreateController = async (req, res) => {
         let newSchool = {
             name: req.body.name,
             domain: req.body.domain,
+            contact: req.body.contact,
             subscriptionStatus: 'pending' 
         };
 
-        // Save the new school to the database
-        let school = await School.create(newSchool);
-
-        // Create Stripe Checkout Session
-        const session = await stripe.checkout.sessions.create({
-            payment_method_types: ['card'],
-            line_items: [{
-                price_data: {
-                    currency: 'usd',
-                    product_data: {
-                        name: 'School Subscription',
-                    },
-                    unit_amount: 2000, // e.g., $20.00 USD
-                },
-                quantity: 1,
-            }],
-            mode: 'payment',
-            success_url: '/admin/schools/payment_success?session_id={CHECKOUT_SESSION_ID}',
-            cancel_url: '/admin/schools',
-        });
-
         // Respond with session ID
-        res.json({ sessionId: session.id });
+        res.redirect("/schools/edit/:id");
     } catch (error) {
         console.error(error);
         res.status(500).send('Internal Server Error');
+    }
+};
+
+export const schoolEditViewController = async (req, res) => {
+    try {
+        res.render('Admin/schoolEdit', { activeMenu: 'school' });
+    } catch (error) {
+        console.error("Error fetching data", error);
+        res.status(500).send("Internal Server Error");
     }
 };
 
