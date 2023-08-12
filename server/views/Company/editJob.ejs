@@ -10,14 +10,37 @@
     <%- include('../partials/companyLeftNavigation') %>
     <div class="right-content">
         <h1>Edit Job</h1>
-        <form action="/company/job/edit/<%= job._id %>" method="POST">        
+        <form action="/company/job/edit/<%= job._id %>" method="POST" class="col-lg-7">        
             <div>
                 <label for="jobTitle">Job Title*:</label>
-                <input type="text" id="jobTitle" name="jobTitle" value="<%= job.jobTitle %>" required>
+                <input type="text" id="jobTitle" name="jobTitle" value="<%= job.jobTitle %>" required class="form-control">
+            </div>
+            <div>
+                <label>Compensation:</label>
+                <div style="display: flex;">
+                    <input type="radio" name="compensationType" id="unpaid" value="unpaid" <%= job.compensationType === 'unpaid' ? 'checked' : '' %>>
+                    <label for="unpaid">&nbsp;Unpaid</label>
+                </div>
+                <div style="display: flex;">
+                    <input type="radio" name="compensationType" id="paid" value="paid" <%= job.compensationType === 'paid' ? 'checked' : '' %>>
+                    <label for="paid">&nbsp;Paid</label>
+                </div>
+                <div id="rateDetails" style="display: <%= job.compensationType === 'paid' ? 'block' : 'none' %>;">
+                    <div style="display: flex;">
+                        <input type="radio" name="rateType" id="hourly" value="hourly" <%= job.rateType === 'hourly' ? 'checked' : '' %>>
+                        <label for="hourly" class="mt-2" style="width: unset;">&nbsp;Hourly:&nbsp;</label>
+                        <input type="text" id="hourlyRate" name="hourlyRate" placeholder="$ per hour" style="width: unset;" value="<%= job.hourlyRate %>">
+                    </div>
+                    <div style="display: flex;">
+                        <input type="radio" name="rateType" id="annual" value="annual" <%= job.rateType === 'annual' ? 'checked' : '' %>>
+                        <label for="annual" class="mt-2" style="width: unset;">&nbsp;Annually:&nbsp;</label>
+                        <input type="text" id="annualRate" name="annualRate" placeholder="$ per year" style="width: unset;" value="<%= job.annualRate %>">
+                    </div>
+                </div>
             </div>            
             <div>
                 <label for="workSetup">Work Setup*:</label>
-                <select id="workSetup" name="workSetup">
+                <select id="workSetup" name="workSetup" class="form-control">
                     <option value="Hybrid" <%= job.workSetup === 'Hybrid' ? 'selected' : '' %>>Hybrid</option>
                     <option value="Remote" <%= job.workSetup === 'Remote' ? 'selected' : '' %>>Remote</option>
                     <option value="In-Office" <%= job.workSetup === 'In-Office' ? 'selected' : '' %>>In-Office</option>
@@ -25,15 +48,15 @@
             </div>
             <div>
                 <label for="jobLocation">Job Location*:</label>
-                <input type="text" id="jobLocation" name="jobLocation" value="<%= job.jobLocation %>" required>
+                <input type="text" id="jobLocation" name="jobLocation" value="<%= job.jobLocation %>" required class="form-control">
             </div>
             <div>
                 <label for="jobDescription">Job Description*:</label>
-                <textarea id="jobDescription" name="jobDescription" rows="15" required><%= job.jobDescription %></textarea>
+                <textarea id="jobDescription" name="jobDescription" rows="15" required class="form-control"><%= job.jobDescription %></textarea>
             </div>
             <div>
                 <label for="status">Status:</label>
-                <select id="status" name="status">
+                <select id="status" name="status" class="form-control">
                     <option value="open" <%= job.status === 'open' ? 'selected' : '' %>>Open</option>
                     <option value="closed" <%= job.status === 'closed' ? 'selected' : '' %>>Closed</option>
                 </select>
@@ -46,5 +69,17 @@
     </div>
     <!-- Add your JS scripts here -->
     <%- include('../partials/javascript') %>
+    <script>
+        // JavaScript to toggle the rate details based on the compensation type
+        document.querySelectorAll('input[name="compensationType"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                if (this.value === 'paid') {
+                    document.getElementById('rateDetails').style.display = 'block';
+                } else {
+                    document.getElementById('rateDetails').style.display = 'none';
+                }
+            });
+        });
+    </script>
 </body>
 </html>

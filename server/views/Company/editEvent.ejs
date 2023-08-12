@@ -10,34 +10,34 @@
     <%- include('../partials/companyLeftNavigation') %>
     <div class="right-content">
         <h1>Edit Event</h1>
-        <form action="/company/event/edit/<%= event._id %>" method="POST">
-            <div>
+        <form action="/company/event/edit/<%= event._id %>" method="POST" class="col-lg-7">
+            <div class="form-group">
                 <label for="name">Name*:</label>
-                <input type="text" id="name" name="name" value="<%= event.name %>" required>
+                <input type="text" id="name" name="name" value="<%= event.name %>" required class="form-control">
             </div>
-            <div>
+            <div class="form-group">
                 <label for="start">Start Date/Time*:</label>
-                <input type="datetime-local" id="start" name="start" value="<%= new Date(event.start).toISOString().slice(0,16) %>" required>
+                <input type="datetime-local" id="start" name="start" value="<%= new Date(event.start).toISOString().slice(0,16) %>" required  class="form-control">
             </div>    
-            <div>
+            <div class="form-group">
                 <label for="end">End Date/Time*:</label>
-                <input type="datetime-local" id="end" name="end" value="<%= new Date(event.end).toISOString().slice(0,16) %>" required>
+                <input type="datetime-local" id="end" name="end" value="<%= new Date(event.end).toISOString().slice(0,16) %>" required  class="form-control">
             </div>
-            <div>
+            <div class="form-group">
                 <label for="description">Description:</label>
-                <textarea id="description" name="description"><%= event.description %></textarea>
+                <textarea id="description" name="description" class="form-control"><%= event.description %></textarea>
             </div>
-            <div>
+            <div class="form-group">
                 <label for="linkOrLocation">Link/Location:</label>
-                <input type="text" id="linkOrLocation" name="linkOrLocation" value="<%= event.linkOrLocation %>">
+                <input type="text" id="linkOrLocation" name="linkOrLocation" value="<%= event.linkOrLocation %>" class="form-control">
             </div>
-            <div>
+            <div class="form-group">
                 <label for="comments">Comments:</label>
-                <textarea id="comments" name="comments"><%= event.comments %></textarea>
+                <textarea id="comments" name="comments" class="form-control"><%= event.comments %></textarea>
             </div>
-            <div>
+            <div class="form-group">
                 <label for="type">Type*:</label>
-                <select id="type" name="type" required>
+                <select id="type" name="type" required class="form-control">
                     <option value="in-person" <%= event.type === 'in-person' ? 'selected' : '' %>>In-person</option>
                     <option value="live" <%= event.type === 'live' ? 'selected' : '' %>>Live</option>
                     <option value="webinar" <%= event.type === 'webinar' ? 'selected' : '' %>>Webinar</option>

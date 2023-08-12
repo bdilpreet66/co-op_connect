@@ -11,7 +11,7 @@ export const loginPostController = async (req, res) => {
 
         if (user) {
             req.session.userId = user._id;
-
+            req.session.companyId = user.companyId;
             if (remember_me) {
                 // Extend the session to, e.g., 30 days if "Remember Me" is checked
                 req.session.cookie.maxAge = 30 * 24 * 60 * 60 * 1000;
@@ -35,5 +35,12 @@ export const loginPostController = async (req, res) => {
         res.render('login', { error: 'Something went wrong contact the admin.' });
     }
 };
+
+
+export const logoutPostController = async (req, res) => {    
+    req.session.destroy();
+    res.redirect('/');
+};
+
 
 

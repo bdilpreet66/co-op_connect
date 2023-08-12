@@ -11,22 +11,22 @@
     <div class="right-content">
         <h1>Company Profile</h1>
         
-        <form action="/company/company/edit/<%= company._id %>" method="POST">
-            <div>
+        <form action="/company/company/edit/<%= company._id %>" method="POST" class="col-lg-7">
+            <div class="form-group">
                 <label>Name: </label>
-                <input type="text" name="name" value="<%= company.name %>">
+                <input type="text" name="name" value="<%= company.name %>" class="form-control">
             </div>
-            <div>
+            <div class="form-group">
                 <label>Email: </label>
-                <input type="email" name="email" value="<%= company.email %>">
+                <input type="email" name="email" value="<%= company.email %>" class="form-control">
             </div>
-            <div>
+            <div class="form-group">
                 <label>Phone Number: </label>
-                <input type="text" name="phoneNumber" value="<%= company.phoneNumber %>">
+                <input type="text" name="phoneNumber" value="<%= company.phoneNumber %>" class="form-control">
             </div>
-            <div>
+            <div class="form-group">
                 <label>Additional Info: </label>
-                <textarea name="additionalInfo" rows="6"><%= company.additionalInfo %></textarea>
+                <textarea name="additionalInfo" rows="6" class="form-control"><%= company.additionalInfo %></textarea>
             </div>            
             <div class="button-container">
                 <a type="button" class="btn btn-secondary" href="/company/dashboard">Cancel</a>

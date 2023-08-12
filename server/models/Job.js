@@ -5,14 +5,14 @@ const jobSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    /*compensationType: {
+    compensationType: {
         type: String,
         enum: ['unpaid', 'paid'],
         required: true
     },
     rateType: {
         type: String,
-        enum: ['hourly', 'annual'],
+        enum: ['hourly', 'annual', 'na'],
         required: function() { return this.compensationType === 'paid'; }
     },
     hourlyRate: {
@@ -22,7 +22,7 @@ const jobSchema = new mongoose.Schema({
     annualRate: {
         type: Number,
         required: function() { return this.rateType === 'annual'; }
-    },*/
+    },
     workSetup: {
         type: String,
         enum: ['Hybrid', 'Remote', 'In-Office'],
@@ -48,6 +48,10 @@ const jobSchema = new mongoose.Schema({
         enum: ['open', 'closed'],  // Only allow these two values
         required: true,
         default: 'open'  // By default, a job will be set to 'open' when created
+    },
+    postedDate: {
+        type: Date,
+        default: Date.now
     }
 });
 
