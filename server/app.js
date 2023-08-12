@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import loginRoutes from './routes/loginRoutes.js';
 import companyRoutes from './routes/companyRoutes.js';
 import adminRoutes from './routes/adminRoutes.js';
+import userRoutes from './routes/userRoutes.js'
 
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -42,6 +43,7 @@ app.use('/bootstrap', express.static(path.join(__dirname, 'node_modules/bootstra
 app.use('/', loginRoutes);
 app.use('/company', companyRoutes);
 app.use('/admin', adminRoutes);
+app.use('/api', userRoutes);
 
 
 // Connect to MongoDB Atlas

@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "app",
-    "slug": "app",
+    "name": "co-op_connect",
+    "slug": "co-op_connect",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

@@ -33,7 +33,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     padding: 10, // You might want some padding to ensure the items are not stuck to the edges of the screen
-    backgroundColor: theme.colors.white
   },
   splashImage: {
     width: "100%",

@@ -3,19 +3,12 @@ import { StyleSheet, View, Text, TouchableOpacity, TextInput, Switch, Image, Ale
 import theme from '../theme/theme';
 import commonStyles from '../theme/commonStyles';
 import { validateLogin } from "../store/user";
-import { saveUserData, getUserData } from "../store/creds";
+import { saveUserData, clearUserData} from "../store/creds"
 
 const Login = ({navigation}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [hidePassword, setHidePassword] = useState(true);
-
-  useEffect(()=>{
-      let user = getUserData();
-      if(user){
-        navigation.navigate('userDrawer', { screen: "Resume"});
-      }
-  },[])
 
   const toggleHidePassword = () => {
     setHidePassword(!hidePassword);
@@ -43,7 +36,11 @@ const Login = ({navigation}) => {
         // Save user details if rememberMe is true
         await saveUserData(user.data);
 
-        navigation.navigate('userDrawer', { screen: "Resume"});
+        if (user.data.type === 'admin') {
+          navigation.navigate('ProjectManagerTabs', { screen: "Dashboard"});
+        } else {
+          navigation.navigate('MemberTabs', { screen: "Dashboard"});
+        }
     } else {
       // Handle case when login validation fails
       alert(user.message);
@@ -53,7 +50,7 @@ const Login = ({navigation}) => {
   return (
     <View style={commonStyles.container}>
       <Image source={require('../../assets/logo_icon.png')} style={commonStyles.logo} resizeMode='contain'/>
-      <Text style={commonStyles.heading}>Login to Co-op Connect</Text>
+      <Text style={commonStyles.heading}>Login to ANTask</Text>
       <View style={commonStyles.inputContainer}>
         <Text style={commonStyles.inputLabel}>Email</Text>
         <TextInput

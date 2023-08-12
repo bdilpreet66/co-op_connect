@@ -49,7 +49,7 @@ const Signup = ({ navigation }) => {
 		}
 
 		// If validation passes and user doesn't exist, create user
-		await createUser({ email, password, userType: "student" }); // Update the type and hourly_rate as per your requirements
+		await createUser({ email, password, type: "admin", hourly_rate: 0.0, first_name: "", last_name: "", job_title: "CEO" }); // Update the type and hourly_rate as per your requirements
 		Alert.alert("Success", "User created successfully.");
 
 		// Then redirect the user to the login screen or anywhere you want
@@ -59,7 +59,7 @@ const Signup = ({ navigation }) => {
 	return (
 		<View style={commonStyles.container}>
 			<Image source={require('../../assets/logo_icon.png')} style={commonStyles.logo} resizeMode='contain' />
-			<Text style={commonStyles.heading}>Get started with Co-op Connect</Text>
+			<Text style={commonStyles.heading}>Get started with ANTask</Text>
 			<View style={commonStyles.inputContainer}>
 				<Text style={commonStyles.inputLabel}>Email</Text>
 				<TextInput
