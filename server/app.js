@@ -15,7 +15,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
-const port = 3000;
+const port = 3001;
 
 app.set('view engine', 'ejs');
 
@@ -27,7 +27,8 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   cookie: {
-      maxAge: 24 * 60 * 60 * 1000 // 1 day by default
+        secure: false,
+        maxAge: 24 * 60 * 60 * 1000 // 1 day by default
   }
 }));
 

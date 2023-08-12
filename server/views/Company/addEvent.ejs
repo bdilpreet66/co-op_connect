@@ -10,34 +10,34 @@
     <%- include('../partials/companyLeftNavigation') %>
     <div class="right-content">
         <h1>Add a New Event</h1>
-        <form action="/company/saveEvent" method="POST">
-            <div>
+        <form action="/company/saveEvent" method="POST" class="col-lg-7">
+            <div class="form-group">
                 <label for="eventName">Name*:</label>
-                <input type="text" id="name" name="name" required>
+                <input type="text" id="name" name="name" required class="form-control">
             </div>
-            <div>
+            <div class="form-group">
                 <label for="startDateTime">Start Date/Time*:</label>
-                <input type="datetime-local" id="startDateTime" name="start" required>
+                <input type="datetime-local" id="startDateTime" name="start" required class="form-control">
             </div>
-            <div>
+            <div class="form-group">
                 <label for="endDateTime">End Date/Time*:</label>
-                <input type="datetime-local" id="endDateTime" name="end" required>
+                <input type="datetime-local" id="endDateTime" name="end" required class="form-control">
             </div>
-            <div>
+            <div class="form-group">
                 <label for="eventDescription">Description:</label>
-                <textarea id="description" name="description"></textarea>
+                <textarea id="description" name="description" class="form-control"></textarea>
             </div>
-            <div>
+            <div class="form-group">
                 <label for="linksLocation">Links/Location:</label>
-                <input type="text" id="linkOrLocation" name="linkOrLocation">
+                <input type="text" id="linkOrLocation" name="linkOrLocation" class="form-control">
             </div>
-            <div>
+            <div class="form-group">
                 <label for="eventComments">Comments:</label>
-                <textarea id="comments" name="comments"></textarea>
+                <textarea id="comments" name="comments" class="form-control"></textarea>
             </div>
-            <div>
+            <div class="form-group">
                 <label for="eventType">Type*:</label>
-                <select id="type" name="type" required>
+                <select id="type" name="type" required class="form-control">
                     <option value="hackathon">hackathon</option>
                     <option value="in-person">in-person</option>        
                     <option value="live">live</option>

@@ -11,12 +11,16 @@
     <%- include('../partials/companyLeftNavigation') %>
     <div class="right-content">
         <h1>Add a New Job</h1>
-        <form action="/company/saveJob" method="POST" id="frmAddJob">
-            <div>
+        <form action="/company/saveJob" method="POST" id="frmAddJob" class="col-lg-7">
+            <div class="form-group">
                 <label for="jobTitle">Job Title*:</label>
-                <input type="text" id="jobTitle" name="jobTitle" required>
+                <input type="text" id="jobTitle" name="jobTitle" required class="form-control">
             </div>
-            <div>
+            <!--<div>
+                <label for="postedDate">Posting Date*:</label>
+                <input type="datetime-local" id="postedDate" name="postedDate" required>
+            </div>-->
+            <div class="form-group">
                 <label>Compensation:</label>
                 <div style="display: flex;">
                     <input type="radio" name="compensationType" id="unpaid" value="unpaid" checked>
@@ -29,37 +33,37 @@
                 <div id="compensationDetails" style="display: none;">
                     <div style="display: flex;">
                         <input type="radio" name="rateType" id="hourly" value="hourly" checked>
-                        <label for="hourly" class="mt-2">&nbsp;Hourly:</label>
-                        <input type="text" id="hourlyRate" name="hourlyRate" placeholder="$ per hour">
+                        <label for="hourly" class="mt-2" style="width: unset;">&nbsp;Hourly:&nbsp;</label>
+                        <input type="text" id="hourlyRate" name="hourlyRate" placeholder="$ per hour" style="width: unset;">
                     </div>
                     <div style="display: flex;">
                         <input type="radio" name="rateType" id="annual" value="annual">
-                        <label for="annual" class="mt-2">&nbsp;Annually:</label>
-                        <input type="text" id="annualRate" name="annualRate" placeholder="$ per year">
+                        <label for="annual" class="mt-2" style="width: unset;">&nbsp;Annually:&nbsp;</label>
+                        <input type="text" id="annualRate" name="annualRate" placeholder="$ per year" style="width: unset;">
                     </div>
                 </div>
             </div>
-            <div>
+            <div class="form-group">
                 <label for="workSetup">Work Setup*:</label>
-                <select id="workSetup" name="workSetup">
+                <select id="workSetup" name="workSetup" class="form-control">
                     <option value="Hybrid">Hybrid</option>
                     <option value="Remote">Remote</option>
                     <option value="In-Office">In-Office</option>
                 </select>
             </div>
-            <div>
+            <div class="form-group">
                 <label for="jobLocation">Job Location*:</label>
-                <input type="text" id="jobLocation" name="jobLocation" required>
+                <input type="text" id="jobLocation" name="jobLocation" required class="form-control">
             </div>
-            <div>
+            <div class="form-group">
                 <label for="jobDescription">Job Description*:</label>
-                <textarea id="jobDescription" name="jobDescription" rows="15" required></textarea>
+                <textarea id="jobDescription" name="jobDescription" rows="15" required class="form-control"></textarea>
             </div>
-            <div>
+            <div class="form-group">
                 <label for="skills">Skills (comma-separated):</label>
-                <input type="text" id="skills" name="skills">
+                <input type="text" id="skills" name="skills" class="form-control">
             </div> 
-            <div>
+            <div class="form-group">
                 <span>Plan:</span>
                 <div>
                     <input type="radio" name="plan" id="plan1" value="5" checked="checked">
@@ -70,7 +74,7 @@
                     <span for="plan2">$10 per day (your post will appear on top of the search results)</span>
                 </div>
             </div>
-            <div class="border p-3 pt-0">
+            <div class="border p-3 pt-0 form-group">
                 <label for="card-element">Credit or Debit Card</label>
                 <div id="card-element">
                     <!-- A Stripe Element will be inserted here. -->

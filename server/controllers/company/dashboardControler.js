@@ -4,6 +4,12 @@ import Event from '../../models/Event.js';
 import JobApplication from '../../models/JobApplication.js'; // Assuming this is the model where you track job applications
 
 export const companyDasboardController = async (req, res) => {
+    if (req.session.userId) {
+        console.log(`Welcome ${req.session.userId}`);
+      } else {
+        console.log('Please log in first.');
+      }
+
     try {
         const openJobs = await Job.find({ status: 'open' }); // Assuming 'status' field determines if a job is open
         
@@ -20,7 +26,7 @@ export const companyDasboardController = async (req, res) => {
             };
         }));
 
-        res.render('Company/dashboard', { openJobs: jobWithCandidateCounts, openEvents, activeMenu: 'dashboard' });
+        res.render('Company/dashboard', { openJobs: jobWithCandidateCounts, openEvents, activeMenu: 'dashboard', companyId: req.session.companyId });
     } catch (error) {
         console.error("Error fetching data for company dashboard:", error);
         res.status(500).send("Internal Server Error");

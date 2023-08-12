@@ -8,7 +8,8 @@
 <body>
     <!-- Include the left navigation -->
     <%- include('../partials/companyLeftNavigation') %>
-    <div class="right-content">
+    <div class="right-content row">
+       
         <div class="header-container">
             <h1>Open Jobs</h1>
             <div class="btnContainer">
@@ -16,9 +17,9 @@
             </div>
         </div>
         <br>
-        <div class="job-container row">
+        <div class="job-container row mb-4">
         <% openJobs.forEach(job => { %>
-            <div class="job-box col-md-4 col-sm-6 col-lg-2 col-12 ">
+            <div class="job-box col-sm-6 col-md-4 col-lg-2 col-12">
                 <h5><a href="/company/job/edit/<%= job._id %>"><%= job.jobTitle %></a></h5>
                 <p><span class="badge <%= job.status %>"><%= job.status %></span></p>
                 <p><ion-icon name="briefcase-outline"></ion-icon><%= job.workSetup %></p>
@@ -32,13 +33,13 @@
         <div class="header-container">
             <h1>Open and Incoming Events</h1>
             <div class="btnContainer">
-                <a class="btn btn-primary" href="addEvent">Create Event</a>
+                <a class="btn btn-primary" href="addEvent"><ion-icon name="add-outline"></ion-icon>Create an Event</a>
             </div>
         </div>
         <br>
         <div class="job-container row">
             <% openEvents.forEach(event => { %>
-                <div class="job-box col-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="job-box col-sm-6 col-md-4 col-lg-2 col-12">
                     <h5><a class="link" href="/company/event/edit/<%= event._id %>"><%= event.name %></a></h5>
                     <p>
                         <ion-icon name="time-outline"></ion-icon>
@@ -58,6 +59,7 @@
                 </div>
             <% }); %>
         </div>
+        
     </div>
     <%- include('../partials/javascript') %>
 </body>
