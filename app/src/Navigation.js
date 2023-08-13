@@ -9,16 +9,39 @@ import { Ionicons } from '@expo/vector-icons';
 import LoginScreen from './screens/LoginScreen';
 import SignUpScreen from './screens/SignUpScreen';
 import LogoutScreen from './screens/LogoutScreen';
-import ViewResumeScreen from './screens/resume/ViewResumeScreen'
+import ViewResumeScreen from './screens/resume/ViewResumeScreen';
+import EventListScreen from './screens/events/EventListScreen';
+import ViewEventScreen from './screens/events/ViewEventsScreen';
 
 import theme from './theme/theme';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
+export const EventStackScreen = () => {
+  return (
+    <Stack.Navigator initialRouteName="EventList" screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="EventList" component={EventListScreen} options={{ title: 'Events' }} />
+      <Stack.Screen name="ViewEvent" component={ViewEventScreen} options={{ title: 'View Event' }} />
+    </Stack.Navigator>
+  );
+}
+
 function UserDrawer() {
   return (
-    <Drawer.Navigator initialRouteName="Resume">
+    <Drawer.Navigator initialRouteName="Events">
+      <Drawer.Screen
+        name="Events"
+        component={EventStackScreen}
+        options={{
+          drawerIcon: ({ color, size, focused }) => (<Ionicons name="calendar" size={size} color={focused ? theme.colors.primary : color} />),
+          drawerLabel: ({ focused, color }) => (
+            <Text style={{ color: focused ? theme.colors.primary : color }}>
+              Events
+            </Text>
+          )
+        }}
+      />
       <Drawer.Screen
         name="Resume"
         component={ViewResumeScreen}

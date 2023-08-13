@@ -15,7 +15,6 @@ const eventSchema = new mongoose.Schema({
     },
     description: String,
     linkOrLocation: String,
-    comments: String,
     type: {
         type: String,
         enum: ['in-person', 'live', 'webinar','hackathon'], // Add your event types here
