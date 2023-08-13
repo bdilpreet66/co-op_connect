@@ -8,7 +8,7 @@ export const schoolListController = async (req, res) => {
         let searchQuery = req.query.search || '';
         let schools = await School.find({ name: new RegExp(searchQuery, 'i') });
 
-        res.render('Admin/schoolList', { schools, activeMenu: 'school' });
+        res.render('Admin/schoolList', { schools, activeMenu: 'school', email: req.session.email });
     } catch (error) {
         console.error("Error fetching data", error);
         res.status(500).send("Internal Server Error");
@@ -17,7 +17,7 @@ export const schoolListController = async (req, res) => {
 
 export const schoolCreateViewController = async (req, res) => {
     try {
-        res.render('Admin/schoolAdd', { activeMenu: 'school' });
+        res.render('Admin/schoolAdd', { activeMenu: 'school', email: req.session.email });
     } catch (error) {
         console.error("Error fetching data", error);
         res.status(500).send("Internal Server Error");
@@ -53,7 +53,7 @@ export const schoolEditViewController = async (req, res) => {
         if (!school) {
             return res.status(404).send('School not found');
         }
-        res.render('Admin/schoolEdit', { school, activeMenu: 'school' });
+        res.render('Admin/schoolEdit', { school, activeMenu: 'school', email: req.session.email });
     } catch (error) {
         console.error("Error fetching data", error);
         res.status(500).send("Internal Server Error");

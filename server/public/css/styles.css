@@ -218,7 +218,7 @@ form .button-container {
     font-size: 20px;
 }
 
-.job-box {
+.job-box, .user-box {
     border: 1px solid #ccc;
     padding: 15px;
     margin: 10px;
@@ -288,4 +288,116 @@ form .button-container {
 
 .left-navigation ul li.active a {
     color: #D6553C;
+}
+
+.user-card {
+    width: 367px;
+    height: 254px;
+    padding: 20px;
+    background: white;
+    border-radius: 5px;
+    overflow: scroll;
+    border: 0.50px #BABABA solid;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}        
+
+.user-info {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 5px;
+}
+
+.user-name {
+    color: #344054;
+    font-size: 16px;
+    font-family: 'Poppins';
+    font-weight: 500;
+    line-height: 24px;
+    word-wrap: break-word;
+}
+
+.user-skills {
+    width: 270px;
+    color: #344054;
+    font-size: 14px;
+    font-family: 'Poppins';
+    font-weight: 400;
+    line-height: 24px;
+    word-wrap: break-word;
+}
+
+.user-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;  /* This ensures the maximum space between the .user-info and .user-actions */
+    height: 200px;  /* Assuming you want the box to take the full height of its parent container */
+}
+
+.user-actions {
+    display: flex;
+    justify-content: space-between;  /* This will separate the buttons with maximum available space */
+    gap: 10px;
+}
+
+.btn-decline, .btn-approve {
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;  /* Center the text within the button */
+    align-items: center;
+    font-size: 12px;                        
+    line-height: 20px;
+    word-wrap: break-word;
+    border: none; /* Remove default browser styling */
+    cursor: pointer; /* Indicates clickable UI element */
+    transition: background-color 0.3s ease; /* Smooth background color change on hover */           
+}
+
+.btn-decline {
+    background: #F5F5F5;
+    color: #C03636;           
+}
+
+.btn-approve, .btn-new-users {
+    background: #3D7A9C;
+    color: white;            
+}
+
+.btn-approve, .btn-decline {
+    width: 50%;
+}
+
+.btn-new-users, .btn-approved-users {
+    padding: 8px 20px;
+    border-radius: 5px;
+    border: 0;     
+    margin-right: 10px;  
+    background: #F5F5F5;
+    color: #3D7A9C;       
+}
+
+.btn-active {
+    background: #3D7A9C;
+    color: white;      
+}
+
+/* Adding hover effects for better user feedback */
+.btn-decline:hover {
+    background: #E0E0E0;
+}
+
+.btn-approve:hover {
+    background: #2D6A8C;
+}
+
+.inline {
+    display: inline;
+}
+
+.hidden {
+    display: none;
 }

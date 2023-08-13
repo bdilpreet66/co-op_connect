@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users</title>    
+    <%- include('../partials/css') %>
+</head>
+<body>
+    <!-- Include the left navigation -->
+    <%- include('../partials/adminNavbar') %>
+    <div class="container mt-4">
+        <div class="container mt-3 mb-3">
+            <div class="row justify-content-between align-items-center">
+                <div class="col-auto">
+                    <a href="/admin/dashboard">
+                        <img src="/images/Logowithname.png" alt="Logo" class="img-fluid logo">
+                    </a>
+                </div>
+                <div class="col-auto text-right">
+                    <span class="blockquote" style="font-size: 14px;margin-right: 10px; padding-right:10px; border-right: 1px solid grey;"><%= email%></span>
+                    <a href="/" class="blockquote text-decoration-none text-secondary" style="font-size: 14px;">Logout</a>
+                </div>
+            </div>
+            <div class="row justify-content-between align-items-center" style="margin-top: 100px;">
+                <div class="col-auto">
+                    <h1 class="mb-3">Approve Users</h1>
+                    <div class="mb-3">
+                        <button class="btn-new-users inline btn-active">New Users</button>
+                        <button class="btn-approved-users inline">Approved Users</button>
+                        <input type="hidden" id="userFilterType" value="newUser">
+                    </div>
+                </div>                
+            </div>
+        </div>
+        <div class="container mb-3">
+            <input type="text" class="form-control" id="searchInput" placeholder="Search for users...">
+        </div>
+        <div class="job-container row container" id="userContainer"></div>
+    </div>
+
+    <!-- Bootstrap Confirmation Modal -->
+    <div class="modal fade" id="declineModal" tabindex="-1" aria-labelledby="declineModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="declineModalLabel">Decline User</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to decline and delete this user?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" id="confirmDecline">Decline</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include('../partials/javascript') %>
+    <%- include('../partials/approveUser') %>
+    <!-- Search Filtering Script -->
+    <script>        
+        async function fetchUsers(endpoint) {
+            try {
+                const response = await fetch(endpoint);
+                if (!response.ok) throw new Error('Failed to fetch users');
+
+                const hiddenClass = (endpoint === '/admin/users/approved') ? 'hidden' : '';
+
+                const users = await response.json();
+                const usersContainer = document.querySelector('#userContainer');
+
+                let userHTML = '';                
+                users.forEach(user => {
+                    userHTML += `
+                        <div class="user-box col-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="user-info">
+                                <div class="user-name"><a href="/admin/user/${user._id}/profile">${user.personalInfo.name}</a></div>
+                                <div class="user-email">${user.email}</div>
+                                <div class="user-skills">${user.skills.map(skill => skill.name).join(' • ')}</div>
+                            </div>
+                            <div class="user-actions ${hiddenClass}">
+                                <button class="btn-decline" data-bs-toggle="modal" data-bs-target="#declineModal" onclick="setUserId('${user._id}')">Decline</button>
+                                <button class="btn-approve" onclick="approveUser('${user._id}')">Approve</button>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                usersContainer.innerHTML = userHTML;
+
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        }        
+
+        document.querySelector('.btn-new-users').addEventListener('click', () => {
+            fetchUsers('/admin/users/unapproved');    
+            document.querySelector('.btn-new-users').classList.add('btn-active');
+            document.querySelector('.btn-approved-users').classList.remove('btn-active');
+            document.getElementById('userFilterType').value = 'newUser';
+            document.getElementById('searchInput').value = '';
+        });
+
+        document.querySelector('.btn-approved-users').addEventListener('click', () => {
+            fetchUsers('/admin/users/approved');
+            document.querySelector('.btn-new-users').classList.remove('btn-active');
+            document.querySelector('.btn-approved-users').classList.add('btn-active');
+            document.getElementById('userFilterType').value = 'approvedUser';
+            document.getElementById('searchInput').value = '';
+        });
+
+        fetchUsers('/admin/users/unapproved');
+
+        document.getElementById('searchInput').addEventListener('input', (event) => {
+            const searchTerm = event.target.value;
+            const userFilterType = document.getElementById('userFilterType').value;
+            const approved = (userFilterType === 'newUser') ? false : true;
+            const hiddenClass = (userFilterType === 'newUser') ? '' : 'hidden';
+            if (searchTerm.length >= 3) {  // Only search when the user has typed at least 3 characters
+                fetch(`/admin/users/search?q=${searchTerm}&approved=${approved}`)
+                .then(response => response.json())
+                .then(users => {
+                    const userContainer = document.getElementById('userContainer');
+                    userContainer.innerHTML = '';  // Clear the previous list
+                    users.forEach(user => {                        
+                        userContainer.innerHTML += `
+                            <div class="user-box col-12 col-sm-6 col-md-4 col-lg-3">
+                                <div class="user-info">
+                                    <div class="user-name">${user.personalInfo.name}</div>
+                                    <div class="user-email">${user.email}</div>
+                                    <div class="user-skills">
+                                        ${user.skills.map(skill => skill.name).join(' • ')}
+                                    </div>
+                                </div>
+                                <div class="user-actions ${hiddenClass}">
+                                    <button class="btn-decline" data-bs-toggle="modal" data-bs-target="#declineModal" onclick="setUserId('${user._id}')">Decline</button>
+                                    <button class="btn-approve">Approve</button>
+                                </div>
+                            </div>
+                        `;
+                    });
+                });
+            }
+        });
+
+    </script>
+</body>
+
+</html>

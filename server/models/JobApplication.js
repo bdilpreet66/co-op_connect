@@ -6,9 +6,9 @@ const jobApplicationSchema = new mongoose.Schema({
         ref: 'Job',  // Reference to the Job model
         required: true
     },
-    candidateId: {
+    userId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'CandidateProfile',  // Reference to the User model
+        ref: 'User',  // Reference to the User model
         required: true
     },
     appliedDate: {

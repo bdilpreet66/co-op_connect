@@ -61,7 +61,7 @@ function UserDrawer() {
           drawerIcon: ({ color, size, focused }) => (<Ionicons name="log-out" size={size} color={focused ? theme.colors.primary : color} />),
           drawerLabel: ({ focused, color }) => (
             <Text style={{ color: focused ? theme.colors.primary : color }}>
-              Resume
+              Logout
             </Text>
           )
         }}

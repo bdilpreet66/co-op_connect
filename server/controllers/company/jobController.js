@@ -1,6 +1,7 @@
 import Job from '../../models/Job.js';
 import JobApplication from '../../models/JobApplication.js';
-import CandidateProfile from '../../models/CandidateProfile.js';
+import Resume from '../../models/Resume.js';
+import User from '../../models/User.js';
 
 
 export const getAddJob = (req, res) => {
@@ -78,40 +79,47 @@ export const postEditJob = async (req, res) => {
         res.status(500).send("Internal Server Error");
     }
 };
+
 export const getCandidatesForJob = async (req, res) => {
     try {
-        const jobId = req.params.jobId;  // Assuming you're passing the jobId in the URL
+        const jobId = req.params.jobId;
 
         // Fetch the job details
-        const job = await Job.findById(jobId);  // Assuming you have a Job model
+        const job = await Job.findById(jobId);
 
-        // Fetch the job applications for the specific job and populate the candidate details
+        // Fetch the job applications for the specific job and populate the user details
         const jobApplications = await JobApplication.find({ jobId: jobId })
             .populate({
-                path: 'candidateId',
-                model: 'CandidateProfile',
-                select: 'firstName lastName jobTitle school course skills' // Select the desired fields
+                path: 'userId',
+                model: 'User',   
+                select: 'email approved'
             });
 
-        // Extract the candidate details
-        const candidates = jobApplications.map(application => {
-            const profile = application.candidateId;
-            return {
-                firstName: profile.firstName,
-                lastName: profile.lastName,
-                jobTitle: profile.jobTitle,
-                school: profile.school,
-                course: profile.course,
-                skills: profile.skills
-            };
-        });
+        const candidates = await Promise.all(jobApplications.map(async application => {
+            // For each application, find the associated resume
+            const resume = await Resume.findOne({ user: application.userId._id });
+            if (resume) {
+                return {
+                    _id: application.userId._id,
+                    email: application.userId.email,
+                    approved: application.userId.approved,
+                    name: resume.personalInfo.name,
+                    skills: resume.skills
+                };
+            }
+            return null;
+        }));
+
+        const filteredCandidates = candidates.filter(candidate => candidate !== null);
+
+        console.log('filteredCandidates',filteredCandidates);
 
         res.render('company/jobCandidates', { 
-            candidates, 
-            jobTitle: job.jobTitle,  // Pass the job name to the view
+            candidates: filteredCandidates, 
+            jobTitle: job.jobTitle,
             activeMenu: 'jobs',
             companyId: req.session.companyId
-        }); 
+        });
         
     } catch (error) {
         console.error("Error fetching candidates:", error);
@@ -119,5 +127,22 @@ export const getCandidatesForJob = async (req, res) => {
     }
 };
 
+
+export const viewCandidateProfile = async (req, res) => {
+    try {
+        const { userId } = req.params;
+
+        // Find the resume and join with User to fetch the "approved" field
+        const resume = await Resume.findOne({ user: userId }).populate('user');
+
+        if (!resume) {
+            return res.status(404).render('error', { message: "Resume not found" });
+        }        
+        res.render('Company/candidateProfile', { resume , activeMenu: 'jobs', companyId: req.session.companyId });        
+    } catch (error) {
+        console.error("Error fetching resume:", error);
+        res.status(500).render('error', { message: "Internal Server Error" });
+    }
+};
 
 

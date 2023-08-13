@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Jobs List</title>
+    <!-- Add your CSS links here -->    
+    <%- include('../partials/css') %>
+    <style>
+        .badge {
+            padding: 5px 20px;
+            border-radius: 30px;
+            background-color: #3D7A9C;
+            font-size:16px;
+        }
+        .details {
+            border-radius: 8px;
+            background-color: #F5F5F5;
+            padding: 8px 10px;
+        }
+        .not-approved {
+            color: rgb(241, 76, 76);
+        }
+        .approved {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <!-- Include the left navigation -->
+    <%- include('../partials/companyLeftNavigation') %>
+    <div class="right-content">
+        <div class="header-container">
+            <h1>Candidate Profile</h1>            
+        </div>
+        <div class="job-container row mt-4">
+            <%- include('../partials/userProfile') %>
+        </div>
+    </div>
+    <%- include('../partials/javascript') %>
+    <%- include('../partials/approveUser') %>
+</body>
+</html>

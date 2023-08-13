@@ -1,0 +1,61 @@
+<div>
+    <h3><%= resume.personalInfo.name %></h3>
+    <img class="mb-4" src="https://placekitten.com/200/200" alt="User Profile Picture"
+        style="width: 100px; height: 100px; border-radius: 50%;">                            
+    <div class="mb-2">Email</div>
+    <div class="details mb-4"><%= resume.personalInfo.email %></div>
+    <div class="mb-2">Status</div>                            
+    <div class="mb-3 <%= resume.user.approved ? 'approved' : 'not-approved' %>"><%= resume.user.approved ? "Approved" : "Not Approved" %></div>
+    <% if (!resume.user.approved) { %>
+        <div class="user-actions col-md-5 col-lg-3 mb-4">
+            <button class="btn-decline" data-bs-toggle="modal" data-bs-target="#declineModal" onclick="setUserId('<%= resume.user._id %>')">Decline</button>
+            <button class="btn-approve" onclick="approveUser('<%= resume.user._id %>')">Approve</button>
+        </div>
+    <% } %>
+    <div class="mb-2">Skills</div>
+    <div class="mb-4">
+        <% resume.skills.forEach(skill=> { %>
+            <span class="badge">
+                <%= skill.name %>
+                    <%= skill.status ? "(Verified)" : "" %>
+            </span>
+        <% }); %>
+    </div>
+    <div class="mb-2">Education</div>
+    <div class="details mb-4">
+    <% const educationItems=resume.educationExperiences.filter(item=> item.type ===
+        'Education');
+        educationItems.forEach(item => {
+        %>
+        <div>                                    
+            <strong><%= item.title %></strong>                                    
+            <div><%= item.institution %></div>
+            <div><%= item.start %> - <%= item.end %></div>                                    
+            <div>
+            <% if (item.description) { %>                                        
+                <%= item.description %>                                        
+            <% } %>
+            </div>
+        </div>
+    <% }); %>
+    </div>
+
+    <div class="mb-2">Experience</div>
+    <div class="details mb-4">
+        <% const experienceItems=resume.educationExperiences.filter(item=> item.type ===
+            'Experience');
+            experienceItems.forEach(item => {
+            %>
+            <div>                                        
+                <strong><%= item.title %></strong>                                        
+                <div><%= item.institution %></div>
+                <div><%= item.start %> - <%= item.end %></div>
+                <div>
+                <% if (item.description) { %>                                        
+                    <%= item.description %>                                            
+                <% } %>
+                </div>
+            </div>
+        <% }); %>
+    </div>
+</div>        

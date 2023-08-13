@@ -6,6 +6,7 @@ import JobApplication from '../../models/JobApplication.js'; // Assuming this is
 export const companyDasboardController = async (req, res) => {
     if (req.session.userId) {
         console.log(`Welcome ${req.session.userId}`);
+        console.log(`Welcome Company ${req.session.companyId}`);
       } else {
         console.log('Please log in first.');
       }

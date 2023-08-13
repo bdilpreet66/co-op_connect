@@ -4,6 +4,14 @@
     <title>Candidates for Job</title>    
     <!-- Add your CSS links here -->    
     <%- include('../partials/css') %>
+    <style>
+        .badge {
+            padding: 5px 8px;
+            border-radius: 30px;
+            background-color: #3D7A9C;
+            font-size:10px;
+        }        
+    </style>
 </head>
 <body>
     <!-- Include the left navigation -->
@@ -14,11 +22,13 @@
         <div class="job-container row">
             <% candidates.forEach(candidate => { %>
                 <div class="job-box col-md-4 col-sm-6 col-lg-2 col-12 ">
-                    <h5><a href="/company/job/edit/<%= candidate._id %>"><%= candidate.firstName %> <%= candidate.lastName %></a></h5>                    
-                    <p><ion-icon name="trophy-outline"></ion-icon><%= candidate.jobTitle %></p>
-                    <p><ion-icon name="card-outline"></ion-icon><%= candidate.course %></p>
-                    <p><ion-icon name="school-outline"></ion-icon><%= candidate.school %></p>
-                    <p><ion-icon name="list-outline"></ion-icon><%= candidate.skills.join(', ') %></p>                    
+                    <h5><a href="/company/job/candidate/<%= candidate._id %>/profile"><%= candidate.name %></a></h5>                    
+                    <p><ion-icon name="mail"></ion-icon><%= candidate.email %></p>                    
+                    <div>
+                    <% candidate.skills.forEach(skill => { %>
+                        <span class="badge"><%= skill.name %></span> 
+                    <% }); %>
+                    </div>                    
                 </div>
             <% }); %>
         </div>

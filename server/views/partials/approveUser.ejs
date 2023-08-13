@@ -1,0 +1,51 @@
+<script>
+    let currentUserId;
+
+    // Set the user ID when the decline button is clicked
+    function setUserId(userId) {
+        currentUserId = userId;
+    }
+
+    document.getElementById('confirmDecline').addEventListener('click', function() {
+        declineUser(currentUserId);
+    });
+
+    function declineUser(userId) {
+        fetch(`/admin/user/decline/${userId}`, {
+            method: 'DELETE'
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.message) {
+                //alert(data.message);
+                location.reload();
+            } else if (data.error) {
+                alert(data.error);
+            }
+        })
+        .catch(error => {
+            alert('An error occurred. Please try again later.');
+            console.error('There was an error!', error);
+        });
+    }
+
+    async function approveUser(userId) {
+        try {
+            const response = await fetch(`/admin/users/approve/${userId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                location.reload(); // Refresh the page upon successful approval
+            } else {
+                const data = await response.json();
+                alert('Error: ' + (data.message || 'Could not approve user.'));
+            }
+        } catch (error) {
+            alert('Error: ' + error.message);
+        }
+    }
+</script>
