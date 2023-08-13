@@ -25,7 +25,11 @@ const EducationExperienceSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    duration: {
+    start: {
+        type: String,
+        required: true
+    },
+    end: {
         type: String,
         required: true
     },
