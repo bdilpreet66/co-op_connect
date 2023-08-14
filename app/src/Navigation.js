@@ -14,6 +14,8 @@ import EventListScreen from './screens/events/EventListScreen';
 import ViewEventScreen from './screens/events/ViewEventsScreen';
 
 import theme from './theme/theme';
+import CompanyListScreen from './screens/companies/CompanyListScreen';
+import ViewCompanyScreen from './screens/companies/CompanyEventsScreen';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -23,6 +25,15 @@ export const EventStackScreen = () => {
     <Stack.Navigator initialRouteName="EventList" screenOptions={{ headerShown: false }}>
       <Stack.Screen name="EventList" component={EventListScreen} options={{ title: 'Events' }} />
       <Stack.Screen name="ViewEvent" component={ViewEventScreen} options={{ title: 'View Event' }} />
+    </Stack.Navigator>
+  );
+}
+
+export const CompanyStackScreen = () => {
+  return (
+    <Stack.Navigator initialRouteName="CompanyList" screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="CompanyList" component={CompanyListScreen} />
+      <Stack.Screen name="ViewCompany" component={ViewCompanyScreen} />
     </Stack.Navigator>
   );
 }
@@ -38,6 +49,18 @@ function UserDrawer() {
           drawerLabel: ({ focused, color }) => (
             <Text style={{ color: focused ? theme.colors.primary : color }}>
               Events
+            </Text>
+          )
+        }}
+      />
+      <Drawer.Screen
+        name="Companies"
+        component={CompanyStackScreen}
+        options={{
+          drawerIcon: ({ color, size, focused }) => (<Ionicons name="business" size={size} color={focused ? theme.colors.primary : color} />),
+          drawerLabel: ({ focused, color }) => (
+            <Text style={{ color: focused ? theme.colors.primary : color }}>
+              Companies
             </Text>
           )
         }}

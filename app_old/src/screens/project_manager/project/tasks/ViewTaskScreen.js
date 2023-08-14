@@ -38,45 +38,45 @@ const ViewTaskScreen = () => {
 	useFocusEffect(
 		useCallback(() => {
 			const fetchPreReq = async () => {
-				try{
+				try {
 					const results = await listPrerequisites(taskid);
 					setRreReq(results);
-				} catch(error) {
+				} catch (error) {
 					console.log(error)
 				}
 			};
 
 			const fetchUsers = async () => {
-				try{
+				try {
 					const results = await getAllUsers();
 					setUsers(results);
-				} catch(error) {
+				} catch (error) {
 					console.log(error)
 				}
 			};
 
 			const fetchComments = async () => {
-				try{
+				try {
 					const results = await getTaskComments(taskid);
 					setComments(results);
-				} catch(error) {
+				} catch (error) {
 					console.log(error)
 				}
 			};
 
 			const fetchTotalCost = async () => {
-				try{
+				try {
 					const results = await calculateWorkedHour(taskid);
 					setTotalCost(results);
-				} catch(error) {
+				} catch (error) {
 					console.log(error)
 				}
 			};
 
 			const fetchTaskDetails = async () => {
-				try{
+				try {
 					const result = await getTaskById(taskid);
-					if(result){
+					if (result) {
 						setTask({ ...result, end_date: new Date(result.end_date), start_date: new Date(result.start_date) });
 					}
 				} catch {
@@ -129,14 +129,14 @@ const ViewTaskScreen = () => {
 	const onStartDateChange = (selectedDate) => {
 		setShowStartPicker(false);
 		if (selectedDate) {
-			setTask ({ ...task, start_date: new Date(selectedDate) });
+			setTask({ ...task, start_date: new Date(selectedDate) });
 		}
 	};
 
 	const onEndDateChange = (selectedDate) => {
 		setShowEndPicker(false);
 		if (selectedDate) {
-			setTask ({ ...task, end_date: new Date(selectedDate) });
+			setTask({ ...task, end_date: new Date(selectedDate) });
 		}
 	};
 
@@ -161,7 +161,7 @@ const ViewTaskScreen = () => {
 						<TextInput
 							placeholder="Name"
 							value={task.name}
-							onChangeText={ (val) => setTask({ ...task, name: val }) }
+							onChangeText={(val) => setTask({ ...task, name: val })}
 							style={commonStyles.input}
 						/>
 					</View>
@@ -170,10 +170,10 @@ const ViewTaskScreen = () => {
 						<TextInput
 							placeholder="Description"
 							value={task.description}
-							onChangeText={ (val) => setTask({ ...task, description: val }) }
+							onChangeText={(val) => setTask({ ...task, description: val })}
 							multiline
 							numberOfLines={4}
-							style={[commonStyles.input, { height: 140,textAlignVertical:'top' }]}
+							style={[commonStyles.input, { height: 140, textAlignVertical: 'top' }]}
 						/>
 					</View>
 					<View style={styles.inputContainer}>
@@ -220,7 +220,7 @@ const ViewTaskScreen = () => {
 							<Picker
 								style={[commonStyles.input]}
 								selectedValue={task.assigned_to}
-								onValueChange={ (val) => setTask({ ...task, assigned_to: val }) }>
+								onValueChange={(val) => setTask({ ...task, assigned_to: val })}>
 								{users?.map((user, index) => <Picker.Item key={user.email} label={user.email} value={user._id} />)}
 							</Picker>
 						</View>
@@ -231,7 +231,7 @@ const ViewTaskScreen = () => {
 							<Picker
 								style={[commonStyles.input]}
 								selectedValue={task.status}
-								onValueChange={ (val) => setTask({ ...task, status: val }) }>
+								onValueChange={(val) => setTask({ ...task, status: val })}>
 								<Picker.Item key="pending" label="Pending" value="pending" />
 								<Picker.Item key="in-progress" label="In Progress" value="in-progress" />
 								<Picker.Item key="completed" label="Completed" value="completed" />
@@ -260,7 +260,7 @@ const ViewTaskScreen = () => {
 						<View style={[styles.prereqContainer]}>
 							{preReq.map((preitem, index) => <Text key={index} style={[commonStyles.badge, commonStyles.badgeGrey, styles.badge]}>{preitem}</Text>)}
 						</View>
-						<TouchableOpacity onPress={() => navigation.navigate('Pre Req Task', { project: task.project_id , task: task._id })}>
+						<TouchableOpacity onPress={() => navigation.navigate('Pre Req Task', { project: task.project_id, task: task._id })}>
 							<Text style={[commonStyles.link, commonStyles.underline]}>Update Prerequisites</Text>
 						</TouchableOpacity>
 					</View>
@@ -272,7 +272,7 @@ const ViewTaskScreen = () => {
 							placeholder="Write a comment"
 							value={comment}
 							onChangeText={setComment}
-							style={[commonStyles.input,{textAlignVertical:'top'}]}
+							style={[commonStyles.input, { textAlignVertical: 'top' }]}
 							multiline
 							numberOfLines={4}
 						/>
