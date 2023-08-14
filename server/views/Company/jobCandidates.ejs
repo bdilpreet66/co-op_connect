@@ -10,6 +10,7 @@
             border-radius: 30px;
             background-color: #3D7A9C;
             font-size:10px;
+            margin: 3px 3px 3px 0;
         }        
     </style>
 </head>
@@ -18,13 +19,13 @@
     <%- include('../partials/companyLeftNavigation') %>    
     <div class="right-content">    
         <h1>Candidates who applied for the job</h1>
-        <div>Job Posting: <b><%= jobTitle %></b></div>
-        <div class="job-container row">
+        <div><%= jobTitle %></div>
+        <div class="job-container row mt-3">
             <% candidates.forEach(candidate => { %>
-                <div class="job-box col-md-4 col-sm-6 col-lg-2 col-12 ">
+                <div class="job-box col-md-4 col-sm-6 col-lg-3 col-12 ">
                     <h5><a href="/company/job/candidate/<%= candidate._id %>/profile"><%= candidate.name %></a></h5>                    
-                    <p><ion-icon name="mail"></ion-icon><%= candidate.email %></p>                    
-                    <div>
+                    <p><ion-icon name="mail-outline"></ion-icon><%= candidate.email %></p>                    
+                    <div class="mt-2">
                     <% candidate.skills.forEach(skill => { %>
                         <span class="badge"><%= skill.name %></span> 
                     <% }); %>

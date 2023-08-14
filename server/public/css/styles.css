@@ -224,7 +224,7 @@ form .button-container {
     margin: 10px;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);    
-    overflow-x: scroll;        
+    overflow-x: hidden;        
     position: relative;    
 }
 
@@ -400,4 +400,37 @@ form .button-container {
 
 .hidden {
     display: none;
+}
+
+/* General button styling */
+.chat-button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color: #E86646; /* Change this to your preferred color */
+    border: none;
+    border-radius: 15px;    
+    transition: all 0.3s;
+}
+
+.chat-button:hover {
+    background-color: #e45b39; /* Darker green color on hover */
+}
+
+.chat-button:active {
+    background-color: #e45b39;    
+    transform: translateY(4px);
+}
+
+/* Positioning the button to the bottom-right corner */
+.chat-button.float {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 1000; /* To ensure the button remains on top of other content */
 }

@@ -23,8 +23,7 @@
 .menu-icon-wrapper {
     cursor: pointer;
     width: 46px;
-    height: 46px;
-    margin-top: 46px;
+    height: 46px;    
     margin-left: auto;
     margin-bottom: 20px;
 }
@@ -37,8 +36,7 @@
 /* Main Menu title */
 .main-menu-title {
     color: #344054;
-    font-size: 16px;
-    font-family: Inter;
+    font-size: 16px;    
     font-weight: 700;
     letter-spacing: 1px;
     left: 42px;
