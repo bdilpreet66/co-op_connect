@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Messages</title>
+    <%- include('../partials/css') %>
+        <style>
+            .chat-container {
+                display: flex;
+                flex-direction: column;
+                height: 80vh;
+                border: 1px solid #ccc;
+                border-radius: 10px;
+                overflow: hidden;
+                margin: 20px auto;
+                max-width: 600px;
+            }
+
+            .chat-messages {
+                flex: 1;
+                overflow-y: auto;
+                padding: 15px;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .message {
+                padding: 10px;
+                margin-bottom: 10px;
+                border-radius: 10px;
+                max-width: 70%;
+                background-color: rgb(232, 102, 70);
+                color: #fff;
+                align-self: flex-end;
+            }
+
+            .message.isStudent {
+                background-color: gray;
+                align-self: flex-start;
+            }
+
+            .message .audit {
+                font-size: 10px;
+                text-align: right;
+            }
+
+            .message.isStudent .audit {
+                text-align: left;
+            }
+
+            .chat-input-container {
+                display: flex;
+                padding: 10px;
+                border-top: 1px solid #ccc;
+                background-color: #f5f5f5;
+            }
+
+            .chat-input-container textarea {
+                flex-grow: 1;
+                resize: none;
+                padding: 10px;
+                margin-right: 10px;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+            }
+
+            .chat-input-container button {
+                padding: 8px 15px;
+                background-color: rgb(232, 102, 70);
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+
+            .chat-input-container button:hover {
+                background-color: rgb(200, 80, 50);
+            }
+        </style>
+</head>
+
+<body>
+    <%- include('../partials/companyLeftNavigation') %>
+        <div class="right-content">
+            <div class="chat-container">
+                <div class="chat-messages">
+                    <% messages.forEach((msg)=> { %>
+                        <div class="message <%= msg.isStudent ? 'isStudent' : '' %>">
+                            <div>
+                                <%= msg.message %>
+                            </div>
+                            <div class="audit">
+                                <%= new Date(msg.time).toLocaleString() %>
+                            </div>
+                        </div>
+                        <% }); %>
+                </div>
+                <div class="chat-input-container">
+                    <textarea placeholder="Type your message..." rows="2"></textarea>
+                    <button onclick="sendMessage()">Send</button>
+                </div>
+            </div>
+        </div>
+        <%- include('../partials/javascript') %>
+        <script src="/socket.io/socket.io.js"></script>
+        <script>// Connect to the server
+            const socket = io.connect('http://localhost:3001');
+            
+            socket.on('connect', function() {
+                console.log('Connected to the server');
+            });
+            
+            // Listen to 'receive_message' event
+            socket.on('receive_message', function(data) {
+                addMessageToChat(data);
+            });
+            
+            function sendMessage() {
+                const messageArea = document.querySelector(".chat-input-container textarea");
+                const messageText = messageArea.value;
+            
+                if (messageText.trim() === "") {
+                    alert("Please enter a message before sending.");
+                    return;
+                }
+            
+                const data = {
+                    company: '<%= companyId %>',
+                    student: '<%= userId %>',
+                    isStudent: false, 
+                    message: messageText
+                };
+            
+                socket.emit('send_message', data);
+                messageArea.value = ""; // Clear the textarea after sending the message
+            }
+            
+            function addMessageToChat(msg) {
+                const chatMessagesDiv = document.querySelector('.chat-messages');
+                const messageDiv = document.createElement('div');
+            
+                messageDiv.className = `message ${msg.isStudent ? 'isStudent' : ''}`;
+                messageDiv.innerHTML = `
+                    <div>
+                        ${msg.message}
+                    </div>
+                    <div class="audit">
+                        ${new Date(msg.time).toLocaleString()}
+                    </div>
+                `;
+            
+                chatMessagesDiv.appendChild(messageDiv);
+            
+                // Auto-scroll to the bottom to see the latest message
+                chatMessagesDiv.scrollTop = chatMessagesDiv.scrollHeight;
+            }            
+        </script>
+</body>
+
+</html>

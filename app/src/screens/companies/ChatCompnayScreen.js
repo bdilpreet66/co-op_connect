@@ -17,7 +17,7 @@ const ChatCompanyScreen = () => {
     const [message, setMessage] = useState("");
     const [user, setUser] = useState("");
 
-    const socket = io('http://192.168.0.76:3001');
+    const socket = io('http://192.168.0.18:3001');
 
     useFocusEffect(
         useCallback(() => {
@@ -72,7 +72,7 @@ const ChatCompanyScreen = () => {
             <ScrollView style={styles.messageContainer}>
                 {chatMessages.map((msg) => (
                     <View key={msg._id} style={msg.isStudent ? styles.senderMsg : styles.receiverMsg}>
-                        <Text>{msg.message}</Text>
+                        <Text style={{ color: theme.colors.white }}>{msg.message}</Text>
                     </View>
                 ))}
             </ScrollView>
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     },
     senderMsg: {
         alignSelf: 'flex-end',
-        backgroundColor: '#E1FFC7',
+        backgroundColor: theme.colors.primary,
         padding: 10,
         borderRadius: 10,
         marginBottom: 5,

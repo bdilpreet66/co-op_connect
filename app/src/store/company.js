@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Assuming your Express server is running on localhost port 3000
-const API_URL = 'http://192.168.0.76:3001';
+const API_URL = 'http://192.168.0.18:3001';
 
 
 export const listCompanies = async (cur_page = 1, searchText = '') => {
