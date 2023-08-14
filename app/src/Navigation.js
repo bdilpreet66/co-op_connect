@@ -16,6 +16,7 @@ import ViewEventScreen from './screens/events/ViewEventsScreen';
 import theme from './theme/theme';
 import CompanyListScreen from './screens/companies/CompanyListScreen';
 import ViewCompanyScreen from './screens/companies/CompanyEventsScreen';
+import ChatCompanyScreen from './screens/companies/ChatCompnayScreen';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -34,6 +35,7 @@ export const CompanyStackScreen = () => {
     <Stack.Navigator initialRouteName="CompanyList" screenOptions={{ headerShown: false }}>
       <Stack.Screen name="CompanyList" component={CompanyListScreen} />
       <Stack.Screen name="ViewCompany" component={ViewCompanyScreen} />
+      <Stack.Screen name="ViewChat" component={ChatCompanyScreen} />
     </Stack.Navigator>
   );
 }

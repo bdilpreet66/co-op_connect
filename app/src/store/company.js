@@ -60,9 +60,18 @@ export const addComment = async (companyId, comment, comment_by) => {
 };
 
 export const getAllComments = async (companyId) => {
-    console.log("companyId in store",companyId);
     try {
         const response = await axios.get(`${API_URL}/api/company/${companyId}/comments`);        
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching company comments: ", error);
+        throw error;
+    }
+}
+
+export const getAllMessages = async (company, user) => {
+    try {
+        const response = await axios.get(`${API_URL}/api/chat/${company}/${user}`);        
         return response.data;
     } catch (error) {
         console.error("Error fetching company comments: ", error);

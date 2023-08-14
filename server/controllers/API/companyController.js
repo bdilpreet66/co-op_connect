@@ -1,6 +1,6 @@
 import Company from '../../models/Company.js';  // Adjust this import path accordingly
 import CompanyComments from '../../models/CompanyComments.js';
-import mongoose from 'mongoose';
+import Chat from '../../models/Chat.js';
 
 export const listCompaniesController = async (req, res) => {
     try {
@@ -69,3 +69,20 @@ export const getAllCommentsController = async (req, res) => {
         res.status(500).json({ message: "Internal Server Error" });
     }
 };
+
+export const getChatController = async (req, res) => {
+    const companyId = req.params.companyId;
+    const userId = req.params.userId;
+
+    try {
+        const chatMessages = await Chat.find({
+            company: companyId,
+            student: userId
+        });
+
+        res.json(chatMessages);
+    } catch (error) {
+        console.error('Error fetching chat messages:', error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+}
