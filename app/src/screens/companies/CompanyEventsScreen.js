@@ -23,7 +23,7 @@ const ViewCompanyScreen = () => {
         const data = await getCompany(company);
         setCompanyData(data);
 
-        const companyComments = await getAllComments(companyData._id);
+        const companyComments = await getAllComments(company);
         setComments(companyComments);
 
       })();
@@ -77,6 +77,11 @@ const ViewCompanyScreen = () => {
             <Text style={[styles.value, { textAlign: 'justify' }]}>{companyData.additionalInfo}</Text>
           </View>
         </View>
+        <TouchableOpacity style={[commonStyles.button, commonStyles.buttonPrimary]}>
+          <Text style={[commonStyles.buttonText, commonStyles.buttonTextPrimary, { fontWeight: 400 }]} onPress={() => navigation.navigate('ViewChat', { company: companyData._id })}>
+            Open Chat <Ionicons name="chatbox" size={16} />
+          </Text>
+        </TouchableOpacity>
 
 					<View style={styles.inputContainer}>
 						<Text style={commonStyles.inputLabel}>Comments</Text>
