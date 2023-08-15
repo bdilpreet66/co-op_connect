@@ -77,7 +77,7 @@ const ViewResumeScreen = () => {
 		}
 		else {
 			saveResume(resume);
-			Alert.alert("Success", "Project created successfully.");
+			Alert.alert("Success", "Resume was updated successfully.");
 		}
 	}
 

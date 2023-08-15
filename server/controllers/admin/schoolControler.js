@@ -97,8 +97,8 @@ export const schoolSubscriptionController = async (req, res) => {
                 quantity: 1,
             }],
             mode: 'payment',
-            success_url: 'http://localhost:3000/admin/schools/payment-success/64d6831fceb538809600471f?session_id={CHECKOUT_SESSION_ID}',
-            cancel_url: 'http://localhost:3000/admin/schools',
+            success_url: 'http://localhost:3001/admin/schools/payment-success/64d6831fceb538809600471f?session_id={CHECKOUT_SESSION_ID}',
+            cancel_url: 'http://localhost:3001/admin/schools',
         });
 
         // Respond with the Stripe checkout URL

@@ -138,7 +138,7 @@ export const viewCandidateProfile = async (req, res) => {
         if (!resume) {
             return res.status(404).render('error', { message: "Resume not found" });
         }        
-        res.render('Company/candidateProfile', { resume , activeMenu: 'jobs', companyId: req.session.companyId });        
+        res.render('Company/candidateProfile', { resume , activeMenu: 'jobs', companyId: req.session.companyId, userId: userId });        
     } catch (error) {
         console.error("Error fetching resume:", error);
         res.status(500).render('error', { message: "Internal Server Error" });

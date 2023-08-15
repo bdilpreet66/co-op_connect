@@ -34,9 +34,12 @@
         <div class="job-container row mt-4">
             <%- include('../partials/userProfile') %>
         </div>
-        <button class="chat-button float"><ion-icon name="chatbubbles-outline" style="font-size: 24px;margin-right: 6px;"></ion-icon>Chat Candidate</button>
+        <button class="chat-button float" onclick="window.location.href='/company/chat/<%= companyId %>/<%= userId %>'"><ion-icon name="chatbubbles-outline" style="font-size: 24px;margin-right: 6px;"></ion-icon>Chat Candidate</button>
     </div>
     <%- include('../partials/javascript') %>
     <%- include('../partials/approveUser') %>
+    <script>
+
+    </script>    
 </body>
 </html>
