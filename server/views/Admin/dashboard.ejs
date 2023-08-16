@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Jobs List</title>
+    <title>Admin Dashboard</title>
     <!-- Add your CSS links here -->
     <%- include('../partials/css') %>
 </head>
@@ -14,7 +14,7 @@
         <div class="container mt-4 mb-3">
             <div class="row justify-content-between align-items-center">
                 <div class="col-auto">
-                    <h3>Dashboard</h3>
+                    <h3>New Registrations</h3>
                 </div>
                 <div class="col-auto text-right">
                 </div>
@@ -22,25 +22,14 @@
         </div>
             <div class="container row">
                 <% users.forEach(user=> { %>
-                    <div class="job-box col-md-4 col-sm-6 col-lg-2 col-12 ">
-                        <h5><a href="/admin/user/edit/<%= user._id %>">
-                                <%= user.c_name %>
-                            </a></h5>
-                        <p><ion-icon name="briefcase-outline"></ion-icon>
-                            <%= user.email %>
-                        </p>
-
-                        <% if (user.userType==='company' ) { %>
-                            <!-- Content for users of 'someType' -->
-                            <p><span class="badge badge-success">
-                                    <%= user.userType %>
-                                </span></p>
-                            <% } else { %>
-                                <!-- Content for users of other types -->
-                                <p><span class="badge badge-primary">
-                                        <%= user.userType %>
-                                    </span></p>
-                                <% } %>
+                    <div class="job-box col-md-4 col-sm-6 col-lg-3 col-12 ">
+                        <h5>
+                            <a href="<%= user.userType === 'company' ? '/admin/schools/edit/' + user._id : '/admin/user/' + user._id + '/profile' %>">
+                                <%= user.c_name || "[STUDENT]" %>
+                            </a>
+                        </h5>                        
+                        <p><ion-icon name="mail-outline"></ion-icon><%= user.email %></p>
+                        
                     </div>
                     <% }); %>
             </div>

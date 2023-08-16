@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List of Companies</title>    
+    <%- include('../partials/css') %>
+</head>
+<body>
+    <!-- Include the left navigation -->
+    <%- include('../partials/adminNavbar') %>
+    <div class="container mt-4">
+        <div class="container mt-3 mb-3">                       
+            <h3>List of Companies</h3>            
+        </div>
+
+        <div class="container mb-3">
+            <input type="text" class="form-control" id="searchInput" placeholder="Search for companies...">
+        </div>
+
+        <!-- Companies Table -->
+        <div class="container table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>                        
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="schoolsTableBody">
+                    <% companies.forEach(company => { %>
+                        <tr>
+                            <td><%= company.name %></td>
+                            <td><%= company.email %></td>
+                            <td><%= company.phoneNumber %></td>                            
+                            <td>
+                                <a href="/admin/companies/view/<%= company._id %>" class="text-success"><ion-icon name="eye-outline"></ion-icon></a>
+                            </td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <%- include('../partials/javascript') %>
+    <!-- Search Filtering Script -->
+    <script>
+        document.getElementById('searchInput').addEventListener('keyup', function(event) {
+            if(event.key === "Enter") {
+                window.location.href = '/listSchools?search=' + this.value;
+            }
+        });
+    </script>
+</body>
+
+</html>

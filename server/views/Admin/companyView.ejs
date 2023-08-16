@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Details</title>
+    <%- include('../partials/css') %>
+    <style>
+        .details {
+            border-radius: 8px;
+            background-color: #F5F5F5;
+            padding: 8px 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Include the left navigation -->
+    <%- include('../partials/adminNavbar') %>    
+    <div class="container mt-4">
+        <div class="mt-3 mb-3">                        
+            <h3>Company Details</h3>            
+        </div>
+
+        <div class="mb-2">Name</div>
+        <div class="details mb-4"><%= company.name %></div>
+        <div class="mb-2">Email</div>
+        <div class="details mb-4"><%= company.email %></div>
+        <div class="mb-2">Phone Number</div>
+        <div class="details mb-4"><%= company.phoneNumber %></div>
+        <div class="mb-2">Additional Information</div>
+        <div class="details mb-4"><%= company.additionalInfo %></div>        
+    </div>    
+    <%- include('../partials/javascript') %>   
+</body>
+</html>
