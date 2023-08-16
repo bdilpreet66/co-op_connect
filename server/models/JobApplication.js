@@ -14,6 +14,10 @@ const jobApplicationSchema = new mongoose.Schema({
     appliedDate: {
         type: Date,
         default: Date.now
+    },    
+    status: {
+        type: String,
+        required: false
     },
     // You can add more fields if needed, like status, resume link, etc.
 });

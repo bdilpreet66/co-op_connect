@@ -21,15 +21,15 @@
         }
         .approved {
             color: green;
-        }
+        }        
     </style>
 </head>
 <body>
     <!-- Include the left navigation -->
     <%- include('../partials/companyLeftNavigation') %>
-    <div class="right-content">
+    <div class="right-content col-lg-8">
         <div class="header-container">
-            <h1>Candidate Profile</h1>            
+            <h1>Candidate Profile - Applied to "<%= jobTitle %>"</h1>
         </div>
         <div class="job-container row mt-4">
             <%- include('../partials/userProfile') %>
@@ -39,7 +39,31 @@
     <%- include('../partials/javascript') %>
     <%- include('../partials/approveUser') %>
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const statusDropdown = document.getElementById('status');
+            const applicationId = '<%= applicationId %>'; // Replace this with the actual application ID. Perhaps from a data-attribute on the dropdown?
 
+            statusDropdown.addEventListener('change', function() {
+                const selectedStatus = this.value;
+
+                fetch(`/company/job/update-application-status/${applicationId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        status: selectedStatus
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data.message);
+                })
+                .catch(error => {
+                    console.error('Error updating application status js:', error);
+                });
+            });
+        });
     </script>    
 </body>
 </html>

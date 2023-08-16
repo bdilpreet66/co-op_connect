@@ -1,3 +1,10 @@
+<style>
+    li ion-icon {
+        margin-bottom: -2px;
+        margin-right: 8px;
+        font-size: 16px;
+    }
+</style>
 <!-- Logo at the top left corner -->
 <nav class="left-navigation">
     <div class="container mt-3 mb-3">
@@ -9,9 +16,9 @@
         <a type="button" class="btn btn-primary" href="/company/addJob"><ion-icon name="add-outline"></ion-icon>Post a Job</a>
     </div>
     <ul>
-        <li class="<%= activeMenu === 'jobs' ? 'active' : '' %>"><a href="/company/jobs">Jobs</a></li>
-        <li class="<%= activeMenu === 'events' ? 'active' : '' %>"><a href="/company/events">Events</a></li>
-        <li class="<%= activeMenu === 'profile' ? 'active' : '' %>"><a href="/company/company/edit/<%= companyId %>">Profile</a></li>
-        <li><a href="/logout">Logout</a></li>
+        <li class="<%= activeMenu === 'jobs' ? 'active' : '' %>"><a href="/company/jobs"><ion-icon name="documents-outline"></ion-icon>Jobs</a></li>
+        <li class="<%= activeMenu === 'events' ? 'active' : '' %>"><a href="/company/events"><ion-icon name="calendar-outline"></ion-icon>Events</a></li>
+        <li class="<%= activeMenu === 'profile' ? 'active' : '' %>"><a href="/company/company/edit/<%= companyId %>"><ion-icon name="settings-outline"></ion-icon>Profile</a></li>
+        <li><a href="/logout"><ion-icon name="log-out-outline"></ion-icon>Logout</a></li>
     </ul>    
 </nav>

@@ -8,7 +8,7 @@
 <body>
     <!-- Include the left navigation -->
     <%- include('../partials/companyLeftNavigation') %>
-    <div class="right-content row col-md-11 col-lg-10 col-12">       
+    <div class="right-content">       
         <div class="header-container">
             <h1>Open Jobs</h1>
             <div class="btnContainer">
@@ -16,7 +16,7 @@
             </div>
         </div>
         <br>
-        <div class="job-container mb-4">
+        <div class="job-container mb-4 row">
         <% openJobs.forEach(job => { %>
             <div class="job-box col-sm-6 col-md-4 col-lg-3 col-12">
                 <h5><a href="/company/job/edit/<%= job._id %>"><%= job.jobTitle %></a></h5>
@@ -28,7 +28,7 @@
             </div>
         <% }); %>
         </div>
-        <hr>
+        <hr style="color:#c4c1c1">
         <div class="header-container">
             <h1>Open and Incoming Events</h1>
             <div class="btnContainer">

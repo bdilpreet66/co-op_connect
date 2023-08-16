@@ -172,7 +172,7 @@ export const viewProfile = async (req, res) => {
         if (!resume) {
             return res.status(404).render('error', { message: "Resume not found" });
         }        
-        res.render('Admin/userProfile', { resume , activeMenu: 'user', email: req.session.email });
+        res.render('Admin/userProfile', { resume , activeMenu: 'user', email: req.session.email, isCandidate: false });
     } catch (error) {
         console.error("Error fetching resume:", error);
         res.status(500).render('error', { message: "Internal Server Error" });

@@ -4,8 +4,7 @@
 .sidebar {
     position: fixed;
     top: 0;
-    left: 0;
-    padding: 20px;
+    left: 0;    
     height: 100vh;
     width: max-content;
     background: white;
@@ -63,17 +62,28 @@
 .menu-list {
     list-style-type: none;
     padding: 0;
-    margin: 60px;
+    margin: 10px 0px;
     left: 42px;
 }
 
-.menu-list li {
-    margin-bottom: 20px; /* Space between list items */
+.menu-list li {    
+    padding: 10px 60px;
 }
 
 .menu-list li a {
     color: #777777;
     text-decoration: none;
+}
+
+.menu-list li:hover {    
+    background-color: #e0e0e0;      
+}
+
+
+.menu-list li a ion-icon {
+    margin-bottom: -2px;
+    font-size: 16px;
+    margin-right: 6px;
 }
 
 .menu-list li.active a {

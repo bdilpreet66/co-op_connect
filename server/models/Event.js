@@ -20,6 +20,10 @@ const eventSchema = new mongoose.Schema({
         enum: ['in-person', 'live', 'webinar','hackathon'], // Add your event types here
         required: true
     },
+    companyId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Company'
+    },
     createdDate: {
         type: Date,
         default: Date.now

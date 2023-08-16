@@ -12,11 +12,11 @@ export const companyDasboardController = async (req, res) => {
       }
 
     try {
-        const openJobs = await Job.find({ status: 'open' }); // Assuming 'status' field determines if a job is open
+        const openJobs = await Job.find({ status: 'open', companyId: req.session.companyId }); // Assuming 'status' field determines if a job is open
         
         // Fetch events where the end date is greater than the current date
         const currentDate = new Date();
-        const openEvents = await Event.find({ end: { $gt: currentDate } });
+        const openEvents = await Event.find({ end: { $gt: currentDate }, companyId: req.session.companyId });
 
         // Fetch the number of candidates who applied to each job
         const jobWithCandidateCounts = await Promise.all(openJobs.map(async job => {

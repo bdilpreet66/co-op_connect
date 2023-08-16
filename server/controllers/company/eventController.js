@@ -13,7 +13,8 @@ export const saveEvent = async (req, res) => {
             description: req.body.description,
             linkOrLocation: req.body.linkOrLocation,
             comments: req.body.comments,
-            type: req.body.type
+            type: req.body.type,
+            companyId: req.session.companyId
         };    
         const event = new Event(eventData);        
         await event.save();
@@ -25,9 +26,20 @@ export const saveEvent = async (req, res) => {
 
 export const getAllEvents = async (req, res) => {
     try {
-        const events = await Event.find();
-        res.render('company/eventsList', { events: events, activeMenu: 'events',companyId: req.session.companyId });
+        const { companyId } = req.session;
+        if (!companyId) {
+            throw new Error("Company ID is not set in session.");
+        }
+
+        const events = await Event.find({ companyId });
+
+        res.render('company/eventsList', { 
+            events, 
+            activeMenu: 'events',
+            companyId 
+        });
     } catch (error) {
+        console.error("Error fetching events:", error);
         res.status(500).send('Failed to fetch events.');
     }
 };

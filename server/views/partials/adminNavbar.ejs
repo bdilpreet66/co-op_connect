@@ -1,27 +1,23 @@
-<link rel="stylesheet" href="/css/adminNavbar.css">
-
-<div class="sidebar" id="sidebar">
-    <!-- Hamburger menu -->
-    <div class="menu-icon-wrapper" onclick="toggleSidebar()">
-        <img src="/images/hamburgermenu.svg" alt="Menu" class="menu-icon">
-    </div>
-
-    <!-- Main Menu Title -->
-    <div class="main-menu-title">MAIN MENU</div>
-    <ul class="menu-list">        
-        <li class="<%= activeMenu === 'user' ? 'active' : '' %>"><a href="/admin/users">Users</a></li>
-        <li class="<%= activeMenu === 'school' ? 'active' : '' %>"><a href="/admin/schools">Schools</a></li>
-    </ul>
-</div>
-
-<script>
-    function toggleSidebar() {
-        const sidebar = document.getElementById('sidebar');
-        console.log(sidebar.style.width)
-        if (sidebar.style.width == "80px"){
-            sidebar.style.width = "max-content";
-        } else {
-            sidebar.style.width = "80px";
-        }
+<style>
+    li ion-icon {
+        margin-bottom: -2px;
+        margin-right: 8px;
+        font-size: 16px;
     }
-</script>
+</style>
+<!-- Logo at the top left corner -->
+<nav class="left-navigation">
+    <div class="container mt-3 mb-3">
+        <a href="/admin/dashboard">
+            <img src="/images/Logowithname.png" alt="Logo" class="img-fluid logo">
+        </a>
+    </div>
+    <div class="btnContainer">
+        <a type="button" class="btn btn-primary" href="/admin/schools/add"><ion-icon name="add-outline"></ion-icon>Add a School</a>
+    </div>
+    <ul>
+        <li class="<%= activeMenu === 'user' ? 'active' : '' %>"><a href="/admin/users"><ion-icon name="people-outline"></ion-icon>Users</a></li>
+        <li class="<%= activeMenu === 'school' ? 'active' : '' %>"><a href="/admin/schools"><ion-icon name="school-outline"></ion-icon>Schools</a></li>
+        <li><a href="/logout"><ion-icon name="log-out-outline"></ion-icon>Logout</a></li>
+    </ul>    
+</nav>
