@@ -17,6 +17,8 @@ import theme from './theme/theme';
 import CompanyListScreen from './screens/companies/CompanyListScreen';
 import ViewCompanyScreen from './screens/companies/CompanyEventsScreen';
 import ChatCompanyScreen from './screens/companies/ChatCompnayScreen';
+import JobListScreen from './screens/jobs/JobsListScreen';
+import ViewJobScreen from './screens/jobs/ViewJobssScreen';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -40,9 +42,30 @@ export const CompanyStackScreen = () => {
   );
 }
 
+export const JobsStackScreen = () => {
+  return (
+    <Stack.Navigator initialRouteName="JobsList" screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="JobsList" component={JobListScreen} />
+      <Stack.Screen name="ViewJob" component={ViewJobScreen} />
+    </Stack.Navigator>
+  );
+}
+
 function UserDrawer() {
   return (
-    <Drawer.Navigator initialRouteName="Events">
+    <Drawer.Navigator initialRouteName="Jobs">
+      <Drawer.Screen
+        name="Jobs"
+        component={JobsStackScreen}
+        options={{
+          drawerIcon: ({ color, size, focused }) => (<Ionicons name="list" size={size} color={focused ? theme.colors.primary : color} />),
+          drawerLabel: ({ focused, color }) => (
+            <Text style={{ color: focused ? theme.colors.primary : color }}>
+              Jobs
+            </Text>
+          )
+        }}
+      />
       <Drawer.Screen
         name="Events"
         component={EventStackScreen}

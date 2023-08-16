@@ -13,7 +13,7 @@ const Login = ({navigation}) => {
   useEffect(()=>{
       let user = getUserData();
       if(user){
-        navigation.navigate('userDrawer', { screen: "Events"});
+        navigation.navigate('userDrawer', { screen: "Jobs"});
       }
   },[])
 
@@ -43,7 +43,7 @@ const Login = ({navigation}) => {
         // Save user details if rememberMe is true
         await saveUserData(user.data);
 
-        navigation.navigate('userDrawer', { screen: "Events"});
+        navigation.navigate('userDrawer', { screen: "Jobs"});
     } else {
       // Handle case when login validation fails
       alert(user.message);
