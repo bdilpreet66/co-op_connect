@@ -3,7 +3,7 @@ import { createUser, searchUsers, validateLogin } from '../controllers/API/userC
 import { createResume, getResume } from '../controllers/API/resumeController.js';
 import { listEventsController } from '../controllers/API/eventsController.js'
 import { listCompaniesController, getCompanyController, addCommentController, getAllCommentsController, getChatController } from '../controllers/API/companyController.js';
-import { applyForJob, fetchMatchingJobs, getApplicationStatus } from '../controllers/API/jobController.js';
+import { applyForJob, fetchMatchingJobs, getApplicationStatus, getAppliedJobs } from '../controllers/API/jobController.js';
 
 const router = express.Router();
 
@@ -21,5 +21,6 @@ router.get('/chat/:companyId/:userId', getChatController);
 router.get('/jobs', fetchMatchingJobs);
 router.post('/apply', applyForJob);
 router.get('/status/:jobId/:userId', getApplicationStatus);
+router.get('/applied-jobs/:userId', getAppliedJobs);
 
 export default router;

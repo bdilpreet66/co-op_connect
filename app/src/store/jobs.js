@@ -2,7 +2,7 @@ import axios from 'axios';
 import { getUserData } from "./creds"
 
 // Assuming your Express server is running on localhost port 3000
-const API_URL = 'http://192.168.0.70:3001';
+const API_URL = 'http://192.168.0.76:3001';
 
 
 export const listJobs = async (cur_page = 1, searchText = '' , user) => {
@@ -50,6 +50,17 @@ export const getApplicationStatus = async (jobId) => {
         const user = await getUserData();
 
         const response = await axios.get(`${API_URL}/api/status/${jobId}/${user._id}`);
+        return response.data; // Assuming the backend returns an object with a "status" key.
+    } catch (error) {
+        console.error("Error fetching application status:");
+    }
+};
+
+export const getAppliedJobs = async () => {
+    try {
+        const user = await getUserData();
+
+        const response = await axios.get(`${API_URL}/api/applied-jobs/${user._id}`);
         return response.data; // Assuming the backend returns an object with a "status" key.
     } catch (error) {
         console.error("Error fetching application status:");

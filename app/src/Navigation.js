@@ -19,6 +19,7 @@ import ViewCompanyScreen from './screens/companies/CompanyEventsScreen';
 import ChatCompanyScreen from './screens/companies/ChatCompnayScreen';
 import JobListScreen from './screens/jobs/JobsListScreen';
 import ViewJobScreen from './screens/jobs/ViewJobssScreen';
+import DashboardScreen from './screens/DashboardScreen';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -53,7 +54,19 @@ export const JobsStackScreen = () => {
 
 function UserDrawer() {
   return (
-    <Drawer.Navigator initialRouteName="Jobs">
+    <Drawer.Navigator initialRouteName="Dashboard">
+      <Drawer.Screen
+        name="Dashboard"
+        component={DashboardScreen}
+        options={{
+          drawerIcon: ({ color, size, focused }) => (<Ionicons name="bar-chart" size={size} color={focused ? theme.colors.primary : color} />),
+          drawerLabel: ({ focused, color }) => (
+            <Text style={{ color: focused ? theme.colors.primary : color }}>
+              Dashboard
+            </Text>
+          )
+        }}
+      />
       <Drawer.Screen
         name="Jobs"
         component={JobsStackScreen}
